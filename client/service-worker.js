@@ -1,14 +1,14 @@
 import routeMatcher from "route-matcher";
 import routes from "../common/routes";
 
-const SWVERSION = "v0.1.40";
+const SWVERSION = "v0.1.42";
 
 const routesWithMatcher = routes.map(route => ({
   ...route,
   matcher: routeMatcher.routeMatcher(route.path)
 }));
 
-const appShellURLs = ["/index.css", "/offline"];
+const appShellURLs = ["/index.css", "/offline", "/manifest.json"];
 const SHELL_CACHE = `shell-${SWVERSION}`;
 const PAGES_CACHE = `pages-${SWVERSION}`;
 
