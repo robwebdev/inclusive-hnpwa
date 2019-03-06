@@ -116,8 +116,7 @@ a {
   transition: 0.1s text-decoration-color;
 }
 
-a:hover,
-a:focus {
+a:hover {
   text-decoration-color: #c35300;
 }
 
@@ -245,4 +244,18 @@ a:focus {
   background: #f8fafc;
   border-top: 3px solid #f1f5f8;
   border-bottom: #ff6600 3px solid;
+}
+
+.main-footer a {
+  color: #903d00;
+  text-decoration-color: rgb(144, 61, 0, 0.4);
+  -webkit-text-decoration-color: rgb(144, 61, 0, 0.4);
+}
+
+.main-footer a:focus {
+  color: white;
+}
+
+.main-footer a:hover {
+  text-decoration-color: rgb(144, 61, 0);
 }
