@@ -47,8 +47,8 @@ module.exports = function renderShell(title, body) {
                 </ul>
             </nav>
             ${body}
-            <footer>
-
+            <footer class="p-m main-footer">
+              Made by <a href="https://twitter.com/RobWebDev">@robwebdev</a>. <a href="https://github.com/robwebdev/inclusive-hnpwa">Code available on github</a>.
             </footer>
         </body>
     </html>`;
