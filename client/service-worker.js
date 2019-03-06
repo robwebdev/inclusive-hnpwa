@@ -1,7 +1,7 @@
 import routeMatcher from "route-matcher";
 import routes from "../common/routes";
 
-const SWVERSION = "v0.1.42";
+const SWVERSION = "v0.1.49";
 
 const routesWithMatcher = routes.map(route => ({
   ...route,
@@ -13,7 +13,11 @@ const SHELL_CACHE = `shell-${SWVERSION}`;
 const PAGES_CACHE = `pages-${SWVERSION}`;
 
 self.addEventListener("install", event => {
-  event.waitUntil(clearCaches().then(() => cacheShellAssets()));
+  event.waitUntil(
+    clearCaches()
+      .then(() => cacheShellAssets())
+      .then(() => self.skipWaiting())
+  );
 });
 
 self.addEventListener("fetch", event => {
@@ -33,10 +37,16 @@ async function handleNavigateRequest(event) {
   }
 }
 
-function handleNonNavigationRequest(event) {
+async function handleNonNavigationRequest(event) {
   const url = new URL(event.request.url);
   if (appShellURLs.indexOf(url.pathname) !== -1) {
-    return caches.match(event.request);
+    try {
+      return caches.match(event.request);
+    } catch (e) {
+      return fetch(event.request);
+    }
+  } else {
+    return fetch(event.request);
   }
 }
 
