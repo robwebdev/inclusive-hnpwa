@@ -1,4 +1,3 @@
-/* Spacing */
 * {
   margin-top: 0;
   margin-bottom: 0;
@@ -46,12 +45,10 @@ main * + * {
   padding-right: 16px;
 }
 
-/* Display */
 .block {
   display: block;
 }
 
-/* A11y */
 .visually-hidden {
   position: absolute !important;
   height: 1px;
@@ -253,6 +250,8 @@ a:focus {
 }
 
 .main-footer a:focus {
+  background-color: #903d00;
+  outline-color: #903d00;
   color: white;
 }
 
