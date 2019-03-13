@@ -1,8 +1,4 @@
-const { h } = require("preact");
-const { render } = require("preact-render-to-string");
-const renderShell = require("./shell");
 const NotFoundPage = require("./pages/not-found");
-const OfflinePage = require("./pages/offline");
 /** @jsx h */
 
 function pluralize(count, word) {
@@ -10,31 +6,28 @@ function pluralize(count, word) {
 }
 
 function mapRoutes(routes) {
-  return routes.map(({ component, ...rest }) => ({
-    render: renderPage(component),
-    ...rest
+  return routes.map(({ path, ...route }) => ({
+    render: wrapRenderPage(route),
+    path
   }));
 }
 
-function renderPage(Page) {
+function wrapRenderPage({ renderPage, getInitialProps, fetchData }) {
   return async function(params, query) {
-    if (Page.fetchData) {
-      const response = await Page.fetchData(params, query);
+    let data;
+
+    if (fetchData) {
+      const response = await fetchData(params, query);
       if (response.ok) {
-        const data = await response.json();
-        const { title, ...props } = Page.getInitialProps(data, params, query);
-        const rendered = renderShell(title, render(<Page {...props} />));
-        return rendered;
+        data = await response.json();
       } else {
-        const { title } = await NotFoundPage.getInitialProps(fetch);
-        const rendered = renderShell(title, render(<NotFoundPage />));
-        return rendered;
+        const props = NotFoundPage.getInitialProps(data, params, query);
+        return NotFoundPage.renderPage(props);
       }
-    } else {
-      const { title, ...props } = Page.getInitialProps({}, params, query);
-      const rendered = renderShell(title, render(<Page {...props} />));
-      return rendered;
     }
+
+    const props = getInitialProps(data, params, query);
+    return renderPage(props);
   };
 }
 

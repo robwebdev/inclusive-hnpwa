@@ -1,7 +1,7 @@
 require("isomorphic-fetch");
 const express = require("express");
 const app = express();
-const routes = require("./common/routes");
+const routes = require("./common/app");
 
 routes.forEach(({ path, render }) => {
   app.get(path, async function(req, res) {

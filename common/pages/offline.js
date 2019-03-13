@@ -1,5 +1,6 @@
 const { h } = require("preact");
 const Main = require("../components/Main");
+const renderShell = require("../shell");
 /** @jsx h */
 
 const Page = ({ news, page }) => (
@@ -9,9 +10,14 @@ const Page = ({ news, page }) => (
   </Main>
 );
 
-Page.getInitialProps = function() {
+function getInitialProps() {
   const title = "Offline - Hacker News";
   return { title };
-};
+}
 
-module.exports = Page;
+module.exports = {
+  getInitialProps,
+  renderPage({ title, ...props }) {
+    return renderShell(title, <Page {...props} />);
+  }
+};

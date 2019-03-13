@@ -9,26 +9,26 @@ const { mapRoutes } = require("./utils");
 module.exports = mapRoutes([
   {
     path: "/offline",
-    component: OfflinePage
+    ...OfflinePage
   },
   {
     path: "/",
-    component: IndexPage
+    ...IndexPage
   },
   {
     path: "/new",
-    component: NewestPage
+    ...NewestPage
   },
   {
     path: "/ask",
-    component: AskPage
+    ...AskPage
   },
   {
     path: "/show",
-    component: ShowPage
+    ...ShowPage
   },
   {
     path: "/item/:id",
-    component: ItemPage
+    ...ItemPage
   }
 ]);

@@ -1,3 +1,5 @@
+const { render } = require("preact-render-to-string");
+
 module.exports = function renderShell(title, body) {
   return `<!DOCTYPE html>
     <html lang="en">
@@ -61,7 +63,7 @@ module.exports = function renderShell(title, body) {
                     </li>
                 </ul>
             </nav>
-            ${body}
+            ${render(body)}
             <footer class="p-m main-footer">
               Made by <a href="https://twitter.com/RobWebDev">@robwebdev</a>. <a href="https://github.com/robwebdev/inclusive-hnpwa">Code available on github</a>.
             </footer>

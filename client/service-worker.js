@@ -1,7 +1,7 @@
 import routeMatcher from "route-matcher";
-import routes from "../common/routes";
+import routes from "../common/app";
 
-const SWVERSION = "v0.1.49";
+const SWVERSION = "v0.1.51";
 
 const routesWithMatcher = routes.map(route => ({
   ...route,

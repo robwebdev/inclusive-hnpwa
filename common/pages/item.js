@@ -3,6 +3,7 @@ const Comments = require("../components/Comments");
 const ItemMeta = require("../components/ItemMeta");
 const Main = require("../components/Main");
 const { pluralize } = require("../utils");
+const renderShell = require("../shell");
 /** @jsx h */
 
 const Page = ({ item }) => (
@@ -27,13 +28,19 @@ const Page = ({ item }) => (
   </Main>
 );
 
-Page.fetchData = function(params) {
+function fetchData(params) {
   return fetch(`https://api.hackerwebapp.com/item/${params.id}`);
-};
+}
 
-Page.getInitialProps = function(item) {
+function getInitialProps(item) {
   const title = `${item.title}`;
   return { item, title };
-};
+}
 
-module.exports = Page;
+module.exports = {
+  fetchData,
+  getInitialProps,
+  renderPage({ title, ...props }) {
+    return renderShell(title, <Page {...props} />);
+  }
+};

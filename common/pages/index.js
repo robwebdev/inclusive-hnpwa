@@ -1,6 +1,7 @@
 const { h } = require("preact");
 const NewsList = require("../components/NewsList");
 const NewsListItem = require("../components/NewsListItem");
+const renderShell = require("../shell");
 /** @jsx h */
 
 const Page = ({ news, page }) => (
@@ -12,12 +13,18 @@ const Page = ({ news, page }) => (
   />
 );
 
-Page.fetchData = function(params, { page = 1 }) {
+function fetchData(params, { page = 1 }) {
   return fetch(`https://api.hackerwebapp.com/news?page=${page}`);
-};
+}
 
-Page.getInitialProps = function(news, params, { page }) {
+function getInitialProps(news, params, { page }) {
   return { news, page };
-};
+}
 
-module.exports = Page;
+module.exports = {
+  fetchData,
+  getInitialProps,
+  renderPage({ title, ...props }) {
+    return renderShell(title, <Page {...props} />);
+  }
+};
