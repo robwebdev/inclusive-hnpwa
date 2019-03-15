@@ -1,8 +1,10 @@
 import Comments from "../components/Comments";
+import Html from "../components/Html";
 import ItemMeta from "../components/ItemMeta";
+import Main from "../components/Main";
 import { NotFoundError } from "../../lib/error";
 import { h } from "preact";
-import renderShell from "../shell";
+import { render } from "preact-render-to-string";
 /** @jsx h */
 
 const Page = ({ item }) => (
@@ -51,6 +53,10 @@ export default {
       }
     }
     const { title, ...props } = getInitialProps(data);
-    return renderShell(title, <Page {...props} />);
+    return render(
+      <Html title={title}>
+        <Page {...props} />
+      </Html>
+    );
   }
 };

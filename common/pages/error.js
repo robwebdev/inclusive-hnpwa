@@ -1,6 +1,7 @@
+import Html from "../components/Html";
 import Main from "../components/Main";
 import { h } from "preact";
-import renderShell from "../shell";
+import { render } from "preact-render-to-string";
 /** @jsx h */
 
 const Page = ({ news, page }) => (
@@ -18,6 +19,10 @@ function getInitialProps() {
 export default {
   async render() {
     const { title, ...props } = getInitialProps();
-    return renderShell(title, <Page {...props} />);
+    return render(
+      <Html title={title}>
+        <Page {...props} />
+      </Html>
+    );
   }
 };

@@ -1,8 +1,9 @@
+import Html from "../components/Html";
 import NewsList from "../components/NewsList";
 import NewsListItem from "../components/NewsListItem";
 import { NotFoundError } from "../../lib/error";
 import { h } from "preact";
-import renderShell from "../shell";
+import { render } from "preact-render-to-string";
 
 /** @jsx h */
 
@@ -38,6 +39,10 @@ export default {
       }
     }
     const { title, ...props } = getInitialProps(data, params, { page });
-    return renderShell(title, <Page {...props} />);
+    return render(
+      <Html title={title}>
+        <Page {...props} />
+      </Html>
+    );
   }
 };
