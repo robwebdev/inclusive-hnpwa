@@ -1,6 +1,6 @@
-const { render } = require("preact-render-to-string");
+import { render } from "preact-render-to-string";
 
-module.exports = function renderShell(title, body) {
+export default function renderShell(title, body) {
   return `<!DOCTYPE html>
     <html lang="en">
         <head>
@@ -69,7 +69,7 @@ module.exports = function renderShell(title, body) {
             </footer>
         </body>
     </html>`;
-};
+}
 
 function isCurrentPage(title = "", current = "") {
   return title === current ? 'aria-current="page"' : "";

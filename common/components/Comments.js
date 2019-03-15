@@ -1,5 +1,5 @@
-const { h } = require("preact");
-const { pluralize } = require("../utils");
+import { h } from "preact";
+import { pluralize } from "../utils";
 /** @jsx h */
 
 const Container = ({ comments, comments_count }) => (
@@ -36,4 +36,4 @@ const Comment = ({ comment }) => (
   </li>
 );
 
-module.exports = Container;
+export default Container;

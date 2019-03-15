@@ -1,9 +1,8 @@
-const { h } = require("preact");
-const Comments = require("../components/Comments");
-const ItemMeta = require("../components/ItemMeta");
-const Main = require("../components/Main");
-const renderShell = require("../shell");
-const { NotFoundError } = require("../../lib/error");
+import Comments from "../components/Comments";
+import ItemMeta from "../components/ItemMeta";
+import { NotFoundError } from "../../lib/error";
+import { h } from "preact";
+import renderShell from "../shell";
 /** @jsx h */
 
 const Page = ({ item }) => (
@@ -37,7 +36,7 @@ function getInitialProps(item) {
   return { item, title };
 }
 
-module.exports = {
+export default {
   async render(params) {
     let data;
     const response = await fetchData(params);

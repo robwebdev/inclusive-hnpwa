@@ -1,13 +1,13 @@
-const IndexPage = require("./pages/index");
-const NewestPage = require("./pages/new");
-const ItemPage = require("./pages/item");
-const ShowPage = require("./pages/show");
-const AskPage = require("./pages/ask");
-const OfflinePage = require("./pages/offline");
-const NotFoundPage = require("./pages/not-found");
-const ErrorPage = require("./pages/error");
+import AskPage from "./pages/ask";
+import ErrorPage from "./pages/error";
+import IndexPage from "./pages/index";
+import ItemPage from "./pages/item";
+import NewestPage from "./pages/new";
+import NotFoundPage from "./pages/not-found";
+import OfflinePage from "./pages/offline";
+import ShowPage from "./pages/show";
 
-module.exports = {
+export default {
   routes: [
     {
       path: "/offline",

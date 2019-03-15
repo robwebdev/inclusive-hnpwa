@@ -1,9 +1,8 @@
-const { h } = require("preact");
-const { pluralize } = require("../utils");
-const Main = require("./Main");
+import Main from "./Main";
+import { h } from "preact";
 /** @jsx h */
 
-module.exports = ({ news, page = 1, heading, renderItem }) => (
+export default ({ news, page = 1, heading, renderItem }) => (
   <Main>
     {news.length > 0 ? (
       <div>

@@ -1,12 +1,12 @@
-const { h } = require("preact");
-const ItemMeta = require("./ItemMeta");
-const { pluralize } = require("../utils");
+import ItemMeta from "./ItemMeta";
+import { h } from "preact";
+import { pluralize } from "../utils";
 /** @jsx h */
 
 const getItemTitleHref = item =>
   item.type === "link" ? item.url : `/item/${item.id}`;
 
-module.exports = ({ item }) => (
+export default ({ item }) => (
   <li class="news-list-item">
     <article>
       <h2>

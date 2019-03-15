@@ -1,6 +1,6 @@
-const { h } = require("preact");
-const Main = require("../components/Main");
-const renderShell = require("../shell");
+import Main from "../components/Main";
+import { h } from "preact";
+import renderShell from "../shell";
 /** @jsx h */
 
 const Page = ({ news, page }) => (
@@ -18,7 +18,7 @@ function getInitialProps() {
   return { title };
 }
 
-module.exports = {
+export default {
   async render() {
     const { title, ...props } = getInitialProps();
     return renderShell(title, <Page {...props} />);

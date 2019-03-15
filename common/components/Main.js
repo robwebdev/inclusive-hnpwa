@@ -1,4 +1,4 @@
-const { h } = require("preact");
+import { h } from "preact";
 /** @jsx h */
 
 const Main = ({ children }) => (
@@ -7,4 +7,4 @@ const Main = ({ children }) => (
   </main>
 );
 
-module.exports = Main;
+export default Main;

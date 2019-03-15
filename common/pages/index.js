@@ -1,8 +1,8 @@
-const { h } = require("preact");
-const NewsList = require("../components/NewsList");
-const NewsListItem = require("../components/NewsListItem");
-const renderShell = require("../shell");
-const { NotFoundError } = require("../../lib/error");
+import NewsList from "../components/NewsList";
+import NewsListItem from "../components/NewsListItem";
+import { NotFoundError } from "../../lib/error";
+import { h } from "preact";
+import renderShell from "../shell";
 /** @jsx h */
 
 const Page = ({ news, page }) => (
@@ -22,7 +22,7 @@ function getInitialProps(news, params, { page }) {
   return { news, page };
 }
 
-module.exports = {
+export default {
   async render(params, { page = 1 }) {
     let data;
     const response = await fetchData(params, { page });
