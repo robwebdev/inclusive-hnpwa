@@ -19,8 +19,8 @@ function getInitialProps() {
 }
 
 module.exports = {
-  getInitialProps,
-  renderPage({ title, ...props }) {
+  async render() {
+    const { title, ...props } = getInitialProps();
     return renderShell(title, <Page {...props} />);
   }
 };

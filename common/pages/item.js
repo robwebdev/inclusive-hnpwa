@@ -2,8 +2,8 @@ const { h } = require("preact");
 const Comments = require("../components/Comments");
 const ItemMeta = require("../components/ItemMeta");
 const Main = require("../components/Main");
-const { pluralize } = require("../utils");
 const renderShell = require("../shell");
+const { NotFoundError } = require("../../lib/error");
 /** @jsx h */
 
 const Page = ({ item }) => (
@@ -38,9 +38,20 @@ function getInitialProps(item) {
 }
 
 module.exports = {
-  fetchData,
-  getInitialProps,
-  renderPage({ title, ...props }) {
+  async render(params) {
+    let data;
+    const response = await fetchData(params);
+    if (response.ok) {
+      data = await response.json();
+    } else {
+      switch (response.status) {
+        case 404:
+          throw new NotFoundError("Page does not exist");
+        default:
+          throw new Error("Failed to fetch page");
+      }
+    }
+    const { title, ...props } = getInitialProps(data);
     return renderShell(title, <Page {...props} />);
   }
 };

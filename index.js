@@ -1,21 +1,11 @@
 require("isomorphic-fetch");
+const wrapApp = require("./lib/express");
 const express = require("express");
-const app = express();
-const routes = require("./common/app");
-
-routes.forEach(({ path, render }) => {
-  app.get(path, async function(req, res) {
-    try {
-      const rendered = await render(req.params, req.query);
-      res.send(rendered);
-    } catch (e) {
-      console.error(e);
-      res.send("Error");
-    }
-  });
-});
+const appConfig = require("./common/app");
+let app = express();
 
 app.use(express.static("dist"));
 app.use(express.static("public"));
+app = wrapApp(app, appConfig);
 
 app.listen(3000);

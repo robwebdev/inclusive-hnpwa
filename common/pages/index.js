@@ -2,6 +2,7 @@ const { h } = require("preact");
 const NewsList = require("../components/NewsList");
 const NewsListItem = require("../components/NewsListItem");
 const renderShell = require("../shell");
+const { NotFoundError } = require("../../lib/error");
 /** @jsx h */
 
 const Page = ({ news, page }) => (
@@ -22,9 +23,20 @@ function getInitialProps(news, params, { page }) {
 }
 
 module.exports = {
-  fetchData,
-  getInitialProps,
-  renderPage({ title, ...props }) {
+  async render(params, { page = 1 }) {
+    let data;
+    const response = await fetchData(params, { page });
+    if (response.ok) {
+      data = await response.json();
+    } else {
+      switch (response.status) {
+        case 404:
+          throw new NotFoundError("Page does not exist");
+        default:
+          throw new Error("Failed to fetch page");
+      }
+    }
+    const { title, ...props } = getInitialProps(data, params, { page });
     return renderShell(title, <Page {...props} />);
   }
 };

@@ -5,13 +5,13 @@ const renderShell = require("../shell");
 
 const Page = ({ news, page }) => (
   <Main>
-    <h1>It looks like you are offline</h1>
-    <p>We'll be making the offline experience better soon.</p>
+    <h1>Oh dear.</h1>
+    <p>Something went wrong with this page. Sorry!</p>
   </Main>
 );
 
 function getInitialProps() {
-  const title = "Offline - Hacker News";
+  const title = "Error - Hacker News";
   return { title };
 }
 
