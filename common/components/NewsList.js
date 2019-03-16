@@ -29,7 +29,7 @@ export default ({ news, page = 1, heading, renderItem }) => (
                 </a>
               </li>
             )}
-            <li class="pagination-list__item">
+            <li class="pagination-list__item pagination-list__next">
               <a
                 href={`?page=${parseInt(page) + 1}`}
                 rel="next"

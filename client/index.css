@@ -199,6 +199,7 @@ a:focus {
 .pagination-list {
   display: flex;
   padding: 0;
+  max-width: 60ch;
 }
 
 .pagination-list * + * {
@@ -208,6 +209,10 @@ a:focus {
 .pagination-list__item {
   display: block;
   font-weight: bold;
+}
+
+.pagination-list__next {
+  margin-left: auto;
 }
 
 .pagination-list__link {
