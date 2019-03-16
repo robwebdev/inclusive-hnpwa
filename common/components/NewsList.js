@@ -6,7 +6,7 @@ export default ({ news, page = 1, heading, renderItem }) => (
   <Main>
     {news.length > 0 ? (
       <div>
-        <h1 id="main-title">
+        <h1 id="main-title" class="text-smaller">
           {heading} - Items {1 + news.length * (page - 1)} to{" "}
           {news.length * page}
         </h1>

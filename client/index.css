@@ -75,17 +75,18 @@ body {
   grid-template-rows: auto 1fr auto;
 }
 
-h1,
-h2 {
-  max-width: 40ch;
+h1 {
   font-size: 1.3rem;
+  max-width: 40ch;
+}
+
+h2 {
+  font-size: 1rem;
+  max-width: 40ch;
 }
 
 p,
-li,
-h3,
-h4,
-h5 {
+li {
   max-width: 60ch;
 }
 
@@ -182,7 +183,8 @@ a:focus {
   color: white;
 }
 
-.item-meta {
+.item-meta,
+.text-smaller {
   font-weight: 600;
   font-size: 0.9em;
   color: #22292f;
@@ -199,7 +201,7 @@ a:focus {
 .pagination-list {
   display: flex;
   padding: 0;
-  max-width: 60ch;
+  max-width: 50ch;
 }
 
 .pagination-list * + * {
