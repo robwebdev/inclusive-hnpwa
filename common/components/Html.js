@@ -97,57 +97,59 @@ export default ({ children, title, offline }) => (
       />
     </head>
     <body>
-      {offline && (
-        <p class="offline-message">
-          It looks like you're offline so we're showing you cached data.
-        </p>
-      )}
-      <nav class="main-nav font-sans-serif ph-s pt-s">
-        <a href="#main" class="skip-link">
-          Skip to main content
-        </a>
-        <p class="logo font-bold ph-s pt-s">
-          Hacker News PWA<span class="text-subtle"> - Inclusive Edition</span>
-        </p>
-        <ul class="main-nav__list horizontal">
-          <li class="main-nav__list-item">
-            <a
-              href="/"
-              class="pv-s ph-s block main-nav__link"
-              aria-current={isCurrentPage(title, "")}
-            >
-              Top
-            </a>
-          </li>
-          <li class="main-nav__list-item">
-            <a
-              href="/new"
-              class="pv-s ph-s block main-nav__link"
-              aria-current={isCurrentPage(title, "Newest")}
-            >
-              Newest
-            </a>
-          </li>
-          <li class="main-nav__list-item">
-            <a
-              href="/show"
-              class="pv-s ph-s block main-nav__link"
-              aria-current={isCurrentPage(title, "Show")}
-            >
-              Show
-            </a>
-          </li>
-          <li class="main-nav__list-item">
-            <a
-              href="/ask"
-              class="pv-s ph-s block main-nav__link"
-              aria-current={isCurrentPage(title, "Ask")}
-            >
-              Ask
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <header>
+        {offline && (
+          <p class="offline-message">
+            It looks like you're offline so we're showing you cached data.
+          </p>
+        )}
+        <nav class="main-nav font-sans-serif ph-s pt-s">
+          <a href="#main" class="skip-link">
+            Skip to main content
+          </a>
+          <p class="logo font-bold ph-s pt-s">
+            Hacker News PWA<span class="text-subtle"> - Inclusive Edition</span>
+          </p>
+          <ul class="main-nav__list horizontal">
+            <li class="main-nav__list-item">
+              <a
+                href="/"
+                class="pv-s ph-s block main-nav__link"
+                aria-current={isCurrentPage(title, "")}
+              >
+                Top
+              </a>
+            </li>
+            <li class="main-nav__list-item">
+              <a
+                href="/new"
+                class="pv-s ph-s block main-nav__link"
+                aria-current={isCurrentPage(title, "Newest")}
+              >
+                Newest
+              </a>
+            </li>
+            <li class="main-nav__list-item">
+              <a
+                href="/show"
+                class="pv-s ph-s block main-nav__link"
+                aria-current={isCurrentPage(title, "Show")}
+              >
+                Show
+              </a>
+            </li>
+            <li class="main-nav__list-item">
+              <a
+                href="/ask"
+                class="pv-s ph-s block main-nav__link"
+                aria-current={isCurrentPage(title, "Ask")}
+              >
+                Ask
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </header>
       {children}
       <footer class="p-m main-footer">
         Made by <a href="https://twitter.com/RobWebDev">@robwebdev</a>.{" "}
