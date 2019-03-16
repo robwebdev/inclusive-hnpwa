@@ -6,14 +6,20 @@ export default ({ news, page = 1, heading, renderItem }) => (
   <Main>
     {news.length > 0 ? (
       <div>
-        <h1 id="main-title" class="text-smaller">
-          {heading} - Items {1 + news.length * (page - 1)} to{" "}
-          {news.length * page}
-        </h1>
+        <div class="news-list__header p-m">
+          <h1 class="text-smaller">
+            {heading} - Items {1 + news.length * (page - 1)} to{" "}
+            {news.length * page}
+          </h1>
+        </div>
         <ol start={1 + news.length * (page - 1)} class="news-list">
           {news.map(item => renderItem(item))}
         </ol>
-        <nav aria-labelledby="pagination-title" tabindex="-1">
+        <nav
+          aria-labelledby="pagination-title"
+          tabindex="-1"
+          class="pagination"
+        >
           <h2 id="pagination-title" class="visually-hidden">
             Pagination
           </h2>

@@ -8,27 +8,20 @@ const getItemTitleHref = item =>
 
 export default ({ item }) => (
   <li class="news-list-item">
-    <article>
-      <h2>
-        <a href={getItemTitleHref(item)}>
-          {item.title}{" "}
-          {item.domain && (
-            <span class="url">
-              <br />({item.domain})
-            </span>
-          )}
-        </a>
-      </h2>
-      <ItemMeta item={item} />
-      <p>
-        <a
-          href={`/item/${item.id}`}
-          class="font-sans-serif news-list-item__comments"
-        >
-          {pluralize(item.comments_count, "comment")}
-          <span class="visually-hidden"> on {item.title}</span>
-        </a>
-      </p>
-    </article>
+    <h2 class="news-list-item__title">
+      <a href={getItemTitleHref(item)}>
+        {item.title} {item.domain && <span class="url">({item.domain})</span>}
+      </a>
+    </h2>
+    <ItemMeta item={item} />
+    <p>
+      <a
+        href={`/item/${item.id}`}
+        class="font-sans-serif news-list-item__comments"
+      >
+        {pluralize(item.comments_count, "comment")}
+        <span class="visually-hidden"> on {item.title}</span>
+      </a>
+    </p>
   </li>
 );

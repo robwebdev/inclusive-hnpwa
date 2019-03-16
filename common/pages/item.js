@@ -8,8 +8,8 @@ import { render } from "preact-render-to-string";
 /** @jsx h */
 
 const Page = ({ item }) => (
-  <Main>
-    <h1 id="main-title">
+  <Main className="p-m">
+    <h1>
       {item.type === "ask" ? (
         item.title
       ) : (
