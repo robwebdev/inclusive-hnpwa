@@ -22,7 +22,7 @@ function getInitialProps() {
 export default {
   async render() {
     const { title, ...props } = getInitialProps();
-    return renderShell(
+    return render(
       <Html title={title}>
         <Page {...props} />
       </Html>

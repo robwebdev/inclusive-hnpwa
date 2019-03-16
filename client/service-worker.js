@@ -1,20 +1,21 @@
 import app from "../common/app";
 import handleNavigationRequest from "../lib/service-worker";
 
-const SWVERSION = "v0.1.58";
+const SWVERSION = "v0.1.62";
 const navigationHandler = handleNavigationRequest(app, {
   serviceWorkerVersion: SWVERSION
 });
 
 const appShellURLs = ["/index.css", "/offline", "/manifest.json"];
-const SHELL_CACHE = `shell-${SWVERSION}`;
+const SHELL_CACHE = `${SWVERSION}-shell`;
 
 self.addEventListener("install", event => {
-  event.waitUntil(
-    clearCaches()
-      .then(() => cacheShellAssets())
-      .then(() => self.skipWaiting())
-  );
+  event.waitUntil(cacheShellAssets());
+  self.skipWaiting();
+});
+
+self.addEventListener("activate", event => {
+  clearCaches(event);
 });
 
 self.addEventListener("fetch", event => {
@@ -36,14 +37,17 @@ async function handleNonNavigationRequest(event) {
   }
 }
 
-function clearCaches() {
-  return caches.keys().then(function(cacheNames) {
-    return Promise.all(
-      cacheNames.map(function(cacheName) {
-        return caches.delete(cacheName);
-      })
-    );
-  });
+function clearCaches(event) {
+  return event.waitUntil(
+    caches.keys().then(cacheKeys => {
+      const oldKeys = cacheKeys.filter(
+        key => key.indexOf(`${SWVERSION}-`) !== 0
+      );
+      console.log(oldKeys);
+      const deletePromises = oldKeys.map(oldKey => caches.delete(oldKey));
+      return Promise.all(deletePromises);
+    })
+  );
 }
 
 async function cacheShellAssets() {
