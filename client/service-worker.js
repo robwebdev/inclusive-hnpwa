@@ -1,7 +1,7 @@
 import app from "../common/app";
 import handleNavigationRequest from "../lib/service-worker";
 
-const SWVERSION = "v0.1.76";
+const SWVERSION = "v0.1.77";
 const navigationHandler = handleNavigationRequest(app, {
   serviceWorkerVersion: SWVERSION
 });
@@ -19,7 +19,6 @@ self.addEventListener("activate", event => {
 });
 
 self.addEventListener("fetch", event => {
-  console.log(event.request.url);
   return navigationHandler(event, unhandledEvent => {
     return event.respondWith(handleNonNavigationRequest(unhandledEvent));
   });
@@ -53,5 +52,5 @@ function clearCaches(event) {
 
 async function cacheShellAssets() {
   const cache = await caches.open(SHELL_CACHE);
-  cache.addAll(appShellURLs);
+  return cache.addAll(appShellURLs);
 }

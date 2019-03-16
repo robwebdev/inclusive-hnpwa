@@ -4,7 +4,7 @@ import { h } from "preact";
 import { render } from "preact-render-to-string";
 /** @jsx h */
 
-const Page = ({ news, page }) => (
+const Page = () => (
   <Main className="p-m">
     <h1>Sorry we couldn't find that page.</h1>
     <p>
@@ -19,7 +19,7 @@ export default {
     const title = "Not Found - Hacker News";
     return render(
       <Html title={title}>
-        <Page {...props} />
+        <Page />
       </Html>
     );
   }

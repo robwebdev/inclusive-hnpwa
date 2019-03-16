@@ -4,7 +4,7 @@ import { h } from "preact";
 import { render } from "preact-render-to-string";
 /** @jsx h */
 
-const Page = ({ news, page }) => (
+const Page = () => (
   <Main className="p-m">
     <h1>It looks like you are offline</h1>
     <p>We'll be making the offline experience better soon.</p>
@@ -15,7 +15,7 @@ export default {
   async render() {
     return render(
       <Html title="Offline - Hacker News">
-        <Page {...props} />
+        <Page />
       </Html>
     );
   }
