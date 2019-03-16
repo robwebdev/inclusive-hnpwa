@@ -1,5 +1,6 @@
 import Html from "../components/Html";
 import Main from "../components/Main";
+import { getCache } from "../utils";
 import { h } from "preact";
 import { render } from "preact-render-to-string";
 /** @jsx h */
@@ -12,8 +13,11 @@ const Page = () => (
 );
 
 export default async function renderPage() {
+  const cache = await getCache();
+  const keys = await cache.keys();
+  console.log(keys);
   return render(
-    <Html title="Offline - Hacker News">
+    <Html title="Offline - Hacker News" offline={true}>
       <Page />
     </Html>
   );

@@ -51,7 +51,7 @@ export default ({ news, page = 1, heading, renderItem }) => (
         </nav>
       </div>
     ) : (
-      <div>
+      <div class="p-m">
         <h1>Uh oh</h1>
         <p>It looks like we've run out of items to show in this section.</p>
       </div>

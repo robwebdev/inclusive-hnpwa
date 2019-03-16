@@ -10,10 +10,6 @@ import ShowPage from "./pages/show";
 export default {
   routes: [
     {
-      path: "/offline",
-      render: OfflinePage
-    },
-    {
       path: "/",
       render: IndexPage
     },
@@ -35,5 +31,6 @@ export default {
     }
   ],
   notFound: NotFoundPage,
-  error: ErrorPage
+  error: ErrorPage,
+  offline: OfflinePage
 };

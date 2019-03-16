@@ -4,7 +4,7 @@ export function pluralize(count, word) {
   return `${count} ${word}${count !== 1 ? "s" : ""}`;
 }
 
-function getCache() {
+export function getCache() {
   if (typeof caches !== "undefined") {
     return caches.open("api-data");
   }
@@ -24,12 +24,12 @@ export async function networkFirstFetch(requestUrl) {
   } catch (e) {
     console.error(e);
     if (cache) {
+      isOffline = true;
       console.warn("Failed to fetch, look in cache for " + requestUrl);
       const match = await cache.match(requestUrl);
       if (match) {
         console.info("Found match in cache for " + requestUrl, match);
         response = match.clone();
-        isOffline = true;
       }
     } else {
       console.warn("No cache match for " + requestUrl);

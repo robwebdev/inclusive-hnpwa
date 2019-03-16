@@ -1,12 +1,12 @@
 import app from "../common/app";
 import handleNavigationRequest from "../lib/service-worker";
 
-const SWVERSION = "v0.1.84";
+const SWVERSION = "v0.1.93";
 const navigationHandler = handleNavigationRequest(app, {
   serviceWorkerVersion: SWVERSION
 });
 
-const appShellURLs = ["/index.css", "/offline", "/manifest.json"];
+const appShellURLs = ["/index.css", "/manifest.json"];
 const SHELL_CACHE = `${SWVERSION}-shell`;
 
 self.addEventListener("install", event => {
