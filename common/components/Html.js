@@ -5,7 +5,7 @@ function isCurrentPage(title = "", current = "") {
   return title === current ? "page" : "";
 }
 
-export default ({ children, title }) => (
+export default ({ children, title, offline }) => (
   <html lang="en">
     <head>
       <meta charset="utf-8" />
@@ -97,6 +97,11 @@ export default ({ children, title }) => (
       />
     </head>
     <body>
+      {offline && (
+        <p class="offline-message">
+          It looks like you're offline so we're showing you cached data.
+        </p>
+      )}
       <nav class="main-nav font-sans-serif ph-s pt-s">
         <a href="#main" class="skip-link">
           Skip to main content

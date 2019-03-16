@@ -5,7 +5,7 @@ import { render } from "preact-render-to-string";
 /** @jsx h */
 
 const Page = ({ news, page }) => (
-  <Main>
+  <Main className="p-m">
     <h1>Sorry we couldn't find that page.</h1>
     <p>
       Maybe something went wrong our end, or you visited a URL that doesn't
@@ -14,14 +14,9 @@ const Page = ({ news, page }) => (
   </Main>
 );
 
-function getInitialProps() {
-  const title = "Not Found - Hacker News";
-  return { title };
-}
-
 export default {
   async render() {
-    const { title, ...props } = getInitialProps();
+    const title = "Not Found - Hacker News";
     return render(
       <Html title={title}>
         <Page {...props} />

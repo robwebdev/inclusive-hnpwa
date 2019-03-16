@@ -156,6 +156,17 @@ a:focus {
   transform: translateY(0%);
 }
 
+.offline-message {
+  background-color: #c35300;
+  color: white;
+  max-width: none;
+  padding: 8px 16px;
+}
+
+.offline-message + .main-nav {
+  border-top: none;
+}
+
 .main-nav {
   background: #f8fafc;
   border-bottom: 3px solid #f1f5f8;

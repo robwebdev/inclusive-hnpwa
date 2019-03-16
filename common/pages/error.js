@@ -5,20 +5,15 @@ import { render } from "preact-render-to-string";
 /** @jsx h */
 
 const Page = ({ news, page }) => (
-  <Main>
+  <Main className="p-m">
     <h1>Oh dear.</h1>
     <p>Something went wrong with this page. Sorry!</p>
   </Main>
 );
 
-function getInitialProps() {
-  const title = "Error - Hacker News";
-  return { title };
-}
-
 export default {
   async render() {
-    const { title, ...props } = getInitialProps();
+    const title = "Error - Hacker News";
     return render(
       <Html title={title}>
         <Page {...props} />

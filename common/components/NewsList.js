@@ -1,4 +1,5 @@
 import Main from "./Main";
+import NewsListItem from "./NewsListItem";
 import { h } from "preact";
 /** @jsx h */
 
@@ -13,7 +14,9 @@ export default ({ news, page = 1, heading, renderItem }) => (
           </h1>
         </div>
         <ol start={1 + news.length * (page - 1)} class="news-list">
-          {news.map(item => renderItem(item))}
+          {news.map(item => (
+            <NewsListItem item={item} />
+          ))}
         </ol>
         <nav
           aria-labelledby="pagination-title"
