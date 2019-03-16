@@ -38,25 +38,23 @@ function getInitialProps(item) {
   return { item, title };
 }
 
-export default {
-  async render(params) {
-    let data;
-    const response = await fetchData(params);
-    if (response.ok) {
-      data = await response.json();
-    } else {
-      switch (response.status) {
-        case 404:
-          throw new NotFoundError("Page does not exist");
-        default:
-          throw new Error("Failed to fetch page");
-      }
+export default async function renderPage(params) {
+  let data;
+  const response = await fetchData(params);
+  if (response.ok) {
+    data = await response.json();
+  } else {
+    switch (response.status) {
+      case 404:
+        throw new NotFoundError("Page does not exist");
+      default:
+        throw new Error("Failed to fetch page");
     }
-    const { title, ...props } = getInitialProps(data);
-    return render(
-      <Html title={title}>
-        <Page {...props} />
-      </Html>
-    );
   }
-};
+  const { title, ...props } = getInitialProps(data);
+  return render(
+    <Html title={title}>
+      <Page {...props} />
+    </Html>
+  );
+}

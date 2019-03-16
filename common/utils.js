@@ -1,21 +1,19 @@
+import { NotFoundError } from "../lib/error";
+
 export function pluralize(count, word) {
   return `${count} ${word}${count !== 1 ? "s" : ""}`;
 }
 
-export function getCaches() {
+function getCache() {
   if (typeof caches !== "undefined") {
-    return caches;
+    return caches.open("api-data");
   }
 }
 
 export async function networkFirstFetch(requestUrl) {
-  let response;
-  let caches = getCaches();
-  let cache;
+  let response, data;
+  let cache = await getCache();
   let isOffline = false;
-  if (caches) {
-    cache = await caches.open("api-data");
-  }
 
   try {
     response = await fetch(requestUrl, { cache: "no-cache" });
@@ -34,9 +32,21 @@ export async function networkFirstFetch(requestUrl) {
         isOffline = true;
       }
     } else {
+      console.warn("No cache match for " + requestUrl);
       throw new Error("Failed to fetch page");
     }
   }
 
-  return { response, isOffline };
+  if (response.ok) {
+    data = await response.json();
+  } else {
+    switch (response.status) {
+      case 404:
+        throw new NotFoundError("Page does not exist");
+      default:
+        throw new Error("Failed to fetch page");
+    }
+  }
+
+  return { data, isOffline };
 }

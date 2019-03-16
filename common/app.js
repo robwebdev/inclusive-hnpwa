@@ -11,27 +11,27 @@ export default {
   routes: [
     {
       path: "/offline",
-      ...OfflinePage
+      render: OfflinePage
     },
     {
       path: "/",
-      ...IndexPage
+      render: IndexPage
     },
     {
       path: "/new",
-      ...NewestPage
+      render: NewestPage
     },
     {
       path: "/ask",
-      ...AskPage
+      render: AskPage
     },
     {
       path: "/show",
-      ...ShowPage
+      render: ShowPage
     },
     {
       path: "/item/:id",
-      ...ItemPage
+      render: ItemPage
     }
   ],
   notFound: NotFoundPage,

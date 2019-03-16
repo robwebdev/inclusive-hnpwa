@@ -11,13 +11,11 @@ const Page = () => (
   </Main>
 );
 
-export default {
-  async render() {
-    const title = "Error - Hacker News";
-    return render(
-      <Html title={title}>
-        <Page />
-      </Html>
-    );
-  }
-};
+export default async function renderPage() {
+  const title = "Error - Hacker News";
+  return render(
+    <Html title={title}>
+      <Page />
+    </Html>
+  );
+}

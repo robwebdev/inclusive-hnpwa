@@ -11,12 +11,10 @@ const Page = () => (
   </Main>
 );
 
-export default {
-  async render() {
-    return render(
-      <Html title="Offline - Hacker News">
-        <Page />
-      </Html>
-    );
-  }
-};
+export default async function renderPage() {
+  return render(
+    <Html title="Offline - Hacker News">
+      <Page />
+    </Html>
+  );
+}
