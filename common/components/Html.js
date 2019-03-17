@@ -100,7 +100,7 @@ export default ({ children, title, offline }) => (
       <header>
         {offline && (
           <p class="offline-message" role="alert">
-            It looks like you're offline so we're showing you cached data.
+            You're in offline mode
           </p>
         )}
         <nav class="main-nav font-sans-serif ph-s pt-s">

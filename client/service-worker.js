@@ -1,7 +1,7 @@
 import app from "../common/app";
 import handleNavigationRequest from "../lib/service-worker";
 
-const SWVERSION = "v0.1.98";
+const SWVERSION = "v0.1.102";
 const navigationHandler = handleNavigationRequest(app, {
   serviceWorkerVersion: SWVERSION
 });

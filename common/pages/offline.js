@@ -1,20 +1,32 @@
 import Html from "../components/Html";
 import Main from "../components/Main";
 import NewsList from "../components/NewsList";
+import NewsListItem from "../components/NewsListItem";
 import { getCache } from "../utils";
 import { h } from "preact";
 import { render } from "../utils";
 /** @jsx h */
 
-const Page = ({ news }) =>
-  news.length ? (
-    <NewsList news={news} heading="Offline news" page={1} />
-  ) : (
-    <Main className="p-m">
+const Page = ({ news }) => (
+  <Main className>
+    <div class="p-m">
       <h1>It looks like you are offline.</h1>
-      <p>We don't have any news stored offline for you to read yet.</p>
-    </Main>
-  );
+      {news.length ? (
+        <p>Here's some news items that you can read offline.</p>
+      ) : (
+        <p>Sorry, We don't have any news stored offline for you to read yet.</p>
+      )}
+    </div>
+
+    {!!news.length && (
+      <ul class="news-list">
+        {news.map(item => (
+          <NewsListItem item={item} />
+        ))}
+      </ul>
+    )}
+  </Main>
+);
 
 const urlBase = "https://api.hackerwebapp.com/item/";
 
