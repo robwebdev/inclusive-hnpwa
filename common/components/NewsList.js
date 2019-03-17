@@ -3,7 +3,7 @@ import NewsListItem from "./NewsListItem";
 import { h } from "preact";
 /** @jsx h */
 
-export default ({ news, page = 1, heading, renderItem }) => (
+export default ({ news, page = 1, heading }) => (
   <Main>
     {news.length > 0 ? (
       <div>
