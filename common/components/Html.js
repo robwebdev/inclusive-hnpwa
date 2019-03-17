@@ -2,7 +2,7 @@ import { h } from "preact";
 /** @jsx h */
 
 function isCurrentPage(title = "", current = "") {
-  return title === current ? "page" : "";
+  return title === current ? "page" : false;
 }
 
 export default ({ children, title, offline }) => (
@@ -99,7 +99,7 @@ export default ({ children, title, offline }) => (
     <body>
       <header>
         {offline && (
-          <p class="offline-message">
+          <p class="offline-message" role="alert">
             It looks like you're offline so we're showing you cached data.
           </p>
         )}
