@@ -4,7 +4,7 @@ import ItemMeta from "../components/ItemMeta";
 import Main from "../components/Main";
 import { h } from "preact";
 import { networkFirstFetch } from "../utils";
-import { render } from "preact-render-to-string";
+import { render } from "../utils";
 /** @jsx h */
 
 const Page = ({ item }) => (

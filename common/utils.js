@@ -1,4 +1,5 @@
 import { NotFoundError } from "../lib/error";
+import { render as preactRender } from "preact-render-to-string";
 
 export function pluralize(count, word) {
   return `${count} ${word}${count !== 1 ? "s" : ""}`;
@@ -49,4 +50,8 @@ export async function networkFirstFetch(requestUrl) {
   }
 
   return { data, isOffline };
+}
+
+export function render(component) {
+  return "<!doctype html>" + preactRender(component);
 }

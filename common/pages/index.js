@@ -2,7 +2,7 @@ import Html from "../components/Html";
 import NewsList from "../components/NewsList";
 import { h } from "preact";
 import { networkFirstFetch } from "../utils";
-import { render } from "preact-render-to-string";
+import { render } from "../utils";
 /** @jsx h */
 
 const Page = ({ news, page }) => (

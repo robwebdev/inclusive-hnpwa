@@ -3,7 +3,7 @@ import Main from "../components/Main";
 import NewsList from "../components/NewsList";
 import { getCache } from "../utils";
 import { h } from "preact";
-import { render } from "preact-render-to-string";
+import { render } from "../utils";
 /** @jsx h */
 
 const Page = ({ news }) =>
