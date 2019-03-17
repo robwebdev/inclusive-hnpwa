@@ -1,7 +1,8 @@
+import { API_DATA_CACHE_KEY } from "../common/utils";
 import app from "../common/app";
 import handleNavigationRequest from "../lib/service-worker";
 
-const SWVERSION = "v0.1.102";
+const SWVERSION = "v0.1.106";
 const navigationHandler = handleNavigationRequest(app, {
   serviceWorkerVersion: SWVERSION
 });
@@ -41,7 +42,7 @@ function clearCaches(event) {
   return event.waitUntil(
     caches.keys().then(cacheKeys => {
       const oldKeys = cacheKeys.filter(
-        key => key.indexOf(`${SWVERSION}-`) !== 0
+        key => key.indexOf(`${SWVERSION}-`) !== 0 && key !== API_DATA_CACHE_KEY
       );
       console.log(oldKeys);
       const deletePromises = oldKeys.map(oldKey => caches.delete(oldKey));

@@ -1,13 +1,15 @@
 import { NotFoundError } from "../lib/error";
 import { render as preactRender } from "preact-render-to-string";
 
+export const API_DATA_CACHE_KEY = "api-data";
+
 export function pluralize(count, word) {
   return `${count} ${word}${count !== 1 ? "s" : ""}`;
 }
 
 export function getCache() {
   if (typeof caches !== "undefined") {
-    return caches.open("api-data");
+    return caches.open(API_DATA_CACHE_KEY);
   }
 }
 

@@ -59,7 +59,6 @@ main * + * {
   height: 1px;
   width: 1px;
   overflow: hidden;
-  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
   clip: rect(1px, 1px, 1px, 1px);
 }
 
@@ -75,7 +74,7 @@ body {
   margin: 0;
   font-family: georgia, serif;
   color: #22292f;
-  min-height: 100%;
+  min-height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
 }
@@ -219,6 +218,10 @@ a:focus {
 
 .news-list-item * + * {
   margin-top: 0.7em;
+}
+
+ul .news-list-item {
+  list-style-type: none;
 }
 
 .news-list-item {
