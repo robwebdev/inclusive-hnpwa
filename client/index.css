@@ -316,3 +316,13 @@ ul .news-list-item {
 .main-footer a:hover {
   text-decoration-color: rgb(144, 61, 0);
 }
+
+.icon {
+  fill: currentColor;
+  height: 1em;
+  width: 1em;
+  vertical-align: middle;
+  display: inline-block;
+  margin-right: 0.3em;
+  margin-top: 0;
+}
