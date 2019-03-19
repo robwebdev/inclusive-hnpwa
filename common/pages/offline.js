@@ -12,9 +12,12 @@ const Page = ({ news }) => (
     <div class="p-m">
       <h1>It looks like you are offline.</h1>
       {news.length ? (
-        <p>Here's some news items that you can read offline.</p>
+        <p>
+          We don't have this item saved offline, but here's some news items that
+          we have saved.
+        </p>
       ) : (
-        <p>Sorry, We don't have any news stored offline for you to read yet.</p>
+        <p>Sorry, We don't have any news saved for you to read offline yet.</p>
       )}
     </div>
 
@@ -36,6 +39,8 @@ export default async function renderPage() {
   const selectedResponses = await Promise.all(
     keys
       .filter(request => request.url.startsWith(urlBase))
+      .reverse()
+      .slice(0, 10)
       .map(request => cache.match(request))
   );
 

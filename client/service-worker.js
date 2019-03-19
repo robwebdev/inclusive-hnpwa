@@ -2,7 +2,7 @@ import { API_DATA_CACHE_KEY } from "../common/utils";
 import app from "../common/app";
 import handleNavigationRequest from "../lib/service-worker";
 
-const SWVERSION = "v0.1.113";
+const SWVERSION = "v0.1.114";
 const navigationHandler = handleNavigationRequest(app, {
   serviceWorkerVersion: SWVERSION
 });
