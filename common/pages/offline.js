@@ -47,7 +47,6 @@ export default async function renderPage() {
   const news = await Promise.all(
     selectedResponses.map(response => response.json())
   );
-  console.log(news);
   return render(
     <Html title="Offline - Hacker News" offline={true}>
       <Page news={news} />

@@ -19,7 +19,12 @@ export async function networkFirstFetch(requestUrl) {
   let isOffline = false;
 
   try {
-    response = await fetch(requestUrl, { cache: "no-cache" });
+    response = await fetch(requestUrl, {
+      cache: "no-cache",
+      headers: {
+        DateTest: new Date().toUTCString()
+      }
+    });
     if (cache) {
       await cache.put(requestUrl, response.clone());
       console.info("Cached response for " + requestUrl);

@@ -2,12 +2,12 @@ import { API_DATA_CACHE_KEY } from "../common/utils";
 import app from "../common/app";
 import handleNavigationRequest from "../lib/service-worker";
 
-const SWVERSION = "v0.1.114";
+const SWVERSION = "v0.1.130";
 const navigationHandler = handleNavigationRequest(app, {
   serviceWorkerVersion: SWVERSION
 });
 
-const appShellURLs = ["/index.css", "/manifest.json"];
+const appShellURLs = ["/index.css", "/manifest.json", "/client.js"];
 const SHELL_CACHE = `${SWVERSION}-shell`;
 
 self.addEventListener("install", event => {
