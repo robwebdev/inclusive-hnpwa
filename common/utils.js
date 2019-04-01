@@ -1,4 +1,4 @@
-import { NotFoundError } from "../lib/error";
+import { NotFoundError } from "./error";
 import { render as preactRender } from "preact-render-to-string";
 
 export const API_DATA_CACHE_KEY = "api-data";
@@ -20,10 +20,7 @@ export async function networkFirstFetch(requestUrl) {
 
   try {
     response = await fetch(requestUrl, {
-      cache: "no-cache",
-      headers: {
-        DateTest: new Date().toUTCString()
-      }
+      cache: "no-cache"
     });
     if (cache) {
       await cache.put(requestUrl, response.clone());
