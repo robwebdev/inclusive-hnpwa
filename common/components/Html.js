@@ -6,7 +6,7 @@ function isCurrentPage(title = "", current = "") {
   return title === current ? "page" : false;
 }
 
-export default ({ children, title, offline }) => (
+export default ({ children, title, offline, prefetch }) => (
   <html lang="en">
     <head>
       <meta charset="utf-8" />
@@ -24,6 +24,7 @@ export default ({ children, title, offline }) => (
       <link rel="stylesheet" href="/index.css" />
       <link rel="manifest" href="/manifest.json" />
       <link rel="icon" href="/images/icons/favicon.ico" type="image/x-icon" />
+      {prefetch && <link href={prefetch} rel="prefetch" />}
       <link
         rel="apple-touch-icon"
         sizes="57x57"
@@ -100,9 +101,6 @@ export default ({ children, title, offline }) => (
     </head>
     <body>
       <header id="main-header">
-        <div id="status">
-          <ConnectionStatus isOffline={offline} />
-        </div>
         <nav class="main-nav font-sans-serif ph-s pt-s">
           <a href="#main" class="skip-link">
             Skip to main content
@@ -149,6 +147,9 @@ export default ({ children, title, offline }) => (
             </li>
           </ul>
         </nav>
+        <div id="status">
+          <ConnectionStatus isOffline={offline} />
+        </div>
       </header>
       {children}
       <footer class="p-m main-footer">

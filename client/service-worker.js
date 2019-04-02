@@ -2,7 +2,7 @@ import { API_DATA_CACHE_KEY } from "../common/utils";
 import app from "../common/app";
 import routeMatcher from "route-matcher";
 
-const SWVERSION = "v0.1.131";
+const SWVERSION = "v0.1.132";
 const navigationHandler = handleNavigationRequest(app, {
   serviceWorkerVersion: SWVERSION
 });
@@ -34,7 +34,14 @@ async function handleNonNavigationRequest(event) {
       return fetch(event.request);
     }
   } else {
-    return fetch(event.request);
+    const response = await fetch(event.request.url);
+    if (event.request.url.indexOf("https://api.hackerwebapp.com/") == 0) {
+      const cache = await caches.open("fresh-cache");
+      const clonedResponse = await response.clone();
+      event.waitUntil(cache.put(event.request.url, clonedResponse));
+      console.log("cached in fresh cache", event.request.url, clonedResponse);
+    }
+    return response;
   }
 }
 
@@ -75,8 +82,14 @@ function handleNavigationRequest(
   return function(event, cb) {
     if (event.request.mode === "navigate") {
       event.respondWith(
-        handleNavigateRequest(event, matchRoute, notFound, offline)
+        handleNavigateRequest(event, matchRoute, notFound, offline).then(
+          response => {
+            caches.delete("fresh-cache");
+            return response;
+          }
+        )
       );
+      console.log("clearing fresh-cache");
     } else {
       return cb(event);
     }

@@ -1,5 +1,3 @@
-console.log("here");
-
 import { h, render } from "preact";
 
 import ConnectionStatus from "../common/components/ConnectionStatus";

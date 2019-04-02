@@ -13,32 +13,47 @@ export function getCache() {
   }
 }
 
+async function matchInFreshCache(requestUrl) {
+  if (typeof caches !== "undefined") {
+    const cache = await caches.open("fresh-cache");
+    return cache.match(requestUrl);
+  }
+}
+
 export async function networkFirstFetch(requestUrl) {
   let response, data;
   let cache = await getCache();
   let isOffline = false;
 
-  try {
-    response = await fetch(requestUrl, {
-      cache: "no-cache"
-    });
-    if (cache) {
-      await cache.put(requestUrl, response.clone());
-      console.info("Cached response for " + requestUrl);
-    }
-  } catch (e) {
-    console.error(e);
-    if (cache) {
-      isOffline = true;
-      console.warn("Failed to fetch, look in cache for " + requestUrl);
-      const match = await cache.match(requestUrl);
-      if (match) {
-        console.info("Found match in cache for " + requestUrl, match);
-        response = match.clone();
+  let freshCacheReponse = await matchInFreshCache(requestUrl);
+  console.log("looking in fresh-cache");
+
+  if (freshCacheReponse) {
+    console.log("Matched response in fresh cache", freshCacheReponse);
+    response = freshCacheReponse;
+  } else {
+    try {
+      response = await fetch(requestUrl, {
+        cache: "no-cache"
+      });
+      if (cache) {
+        await cache.put(requestUrl, response.clone());
+        console.info("Cached response for " + requestUrl);
       }
-    } else {
-      console.warn("No cache match for " + requestUrl);
-      throw new Error("Failed to fetch page");
+    } catch (e) {
+      console.error(e);
+      if (cache) {
+        isOffline = true;
+        console.warn("Failed to fetch, look in cache for " + requestUrl);
+        const match = await cache.match(requestUrl);
+        if (match) {
+          console.info("Found match in cache for " + requestUrl, match);
+          response = match.clone();
+        }
+      } else {
+        console.warn("No cache match for " + requestUrl);
+        throw new Error("Failed to fetch page");
+      }
     }
   }
 
