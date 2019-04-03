@@ -6,7 +6,7 @@ function isCurrentPage(title = "", current = "") {
   return title === current ? "page" : false;
 }
 
-export default ({ children, title, offline, prefetch }) => (
+export default ({ children, title, offline }) => (
   <html lang="en">
     <head>
       <meta charset="utf-8" />
@@ -24,7 +24,6 @@ export default ({ children, title, offline, prefetch }) => (
       <link rel="stylesheet" href="/index.css" />
       <link rel="manifest" href="/manifest.json" />
       <link rel="icon" href="/images/icons/favicon.ico" type="image/x-icon" />
-      {prefetch && <link href={prefetch} rel="prefetch" />}
       <link
         rel="apple-touch-icon"
         sizes="57x57"

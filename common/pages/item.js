@@ -2,8 +2,8 @@ import Comments from "../components/Comments";
 import Html from "../components/Html";
 import ItemMeta from "../components/ItemMeta";
 import Main from "../components/Main";
+import { apiFetch } from "../utils";
 import { h } from "preact";
-import { networkFirstFetch } from "../utils";
 import { render } from "../utils";
 /** @jsx h */
 
@@ -31,7 +31,7 @@ const Page = ({ item }) => (
 
 export default async function renderPage(params) {
   const requestUrl = `https://api.hackerwebapp.com/item/${params.id}`;
-  const { data, isOffline } = await networkFirstFetch(requestUrl);
+  const { data, isOffline } = await apiFetch(requestUrl);
   return render(
     <Html title={data.title} offline={isOffline}>
       <Page item={data} />

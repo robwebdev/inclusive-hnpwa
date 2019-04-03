@@ -2,7 +2,7 @@ import Html from "../components/Html";
 import Main from "../components/Main";
 import NewsList from "../components/NewsList";
 import NewsListItem from "../components/NewsListItem";
-import { getCache } from "../utils";
+import { getOfflineCache } from "../utils";
 import { h } from "preact";
 import { render } from "../utils";
 /** @jsx h */
@@ -34,7 +34,7 @@ const Page = ({ news }) => (
 const urlBase = "https://api.hackerwebapp.com/item/";
 
 export default async function renderPage() {
-  const cache = await getCache();
+  const cache = await getOfflineCache();
   const keys = await cache.keys();
   const selectedResponses = await Promise.all(
     keys

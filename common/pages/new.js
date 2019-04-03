@@ -1,7 +1,7 @@
 import Html from "../components/Html";
 import NewsList from "../components/NewsList";
+import { apiFetch } from "../utils";
 import { h } from "preact";
-import { networkFirstFetch } from "../utils";
 import { render } from "../utils";
 /** @jsx h */
 
@@ -11,7 +11,7 @@ const Page = ({ news, page }) => (
 
 export default async function renderPage(params, { page = 1 }) {
   const requestUrl = `https://api.hackerwebapp.com/newest?page=${page}`;
-  const { data, isOffline } = await networkFirstFetch(requestUrl);
+  const { data, isOffline } = await apiFetch(requestUrl);
   return render(
     <Html title="Newest" offline={isOffline}>
       <Page news={data} page={page} />

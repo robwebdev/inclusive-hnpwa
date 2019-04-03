@@ -1,4 +1,4 @@
-import { API_DATA_CACHE_KEY } from "../common/utils";
+import { LONG_LIVED_OFFLINE_BACK_CACHE } from "../common/utils";
 import app from "../common/app";
 import routeMatcher from "route-matcher";
 
@@ -36,10 +36,10 @@ async function handleNonNavigationRequest(event) {
   } else {
     const response = await fetch(event.request.url);
     if (event.request.url.indexOf("https://api.hackerwebapp.com/") == 0) {
-      const cache = await caches.open("fresh-cache");
+      const cache = await caches.open("prefetch-cache");
       const clonedResponse = await response.clone();
       event.waitUntil(cache.put(event.request.url, clonedResponse));
-      console.log("cached in fresh cache", event.request.url, clonedResponse);
+      console.info("cached in prefetch-cache", event.request.url);
     }
     return response;
   }
@@ -49,9 +49,11 @@ function clearCaches(event) {
   return event.waitUntil(
     caches.keys().then(cacheKeys => {
       const oldKeys = cacheKeys.filter(
-        key => key.indexOf(`${SWVERSION}-`) !== 0 && key !== API_DATA_CACHE_KEY
+        key =>
+          key.indexOf(`${SWVERSION}-`) !== 0 &&
+          key !== LONG_LIVED_OFFLINE_BACK_CACHE
       );
-      console.log(oldKeys);
+      console.info("cleared cache keys:", oldKeys);
       const deletePromises = oldKeys.map(oldKey => caches.delete(oldKey));
       return Promise.all(deletePromises);
     })
@@ -84,12 +86,12 @@ function handleNavigationRequest(
       event.respondWith(
         handleNavigateRequest(event, matchRoute, notFound, offline).then(
           response => {
-            caches.delete("fresh-cache");
+            caches.delete("prefetch-cache");
             return response;
           }
         )
       );
-      console.log("clearing fresh-cache");
+      console.log("clearing prefetch-cache");
     } else {
       return cb(event);
     }
