@@ -2,7 +2,7 @@ import Comments from "../components/Comments";
 import Html from "../components/Html";
 import ItemMeta from "../components/ItemMeta";
 import Main from "../components/Main";
-import { apiFetch } from "../utils";
+import { apiFetch } from "../fetch";
 import { h } from "preact";
 import { render } from "../utils";
 /** @jsx h */

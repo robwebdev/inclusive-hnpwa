@@ -1,5 +1,5 @@
-import { apiFetch, nextPage } from "../utils";
-import { prefetch, render } from "../utils";
+import { apiFetch, prefetch } from "../fetch";
+import { nextPage, render } from "../utils";
 
 import Html from "../components/Html";
 import NewsList from "../components/NewsList";

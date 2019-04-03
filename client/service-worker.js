@@ -34,14 +34,7 @@ async function handleNonNavigationRequest(event) {
       return fetch(event.request);
     }
   } else {
-    const response = await fetch(event.request.url);
-    if (event.request.url.indexOf("https://api.hackerwebapp.com/") == 0) {
-      const cache = await caches.open("prefetch-cache");
-      const clonedResponse = await response.clone();
-      event.waitUntil(cache.put(event.request.url, clonedResponse));
-      console.info("cached in prefetch-cache", event.request.url);
-    }
-    return response;
+    return fetch(event.request.url);
   }
 }
 

@@ -1,6 +1,6 @@
 import Html from "../components/Html";
 import NewsList from "../components/NewsList";
-import { apiFetch } from "../utils";
+import { apiFetch } from "../fetch";
 import { h } from "preact";
 import { render } from "../utils";
 /** @jsx h */
