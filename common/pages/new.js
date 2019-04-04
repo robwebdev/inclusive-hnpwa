@@ -4,6 +4,7 @@ import { nextPage, render } from "../utils";
 import Html from "../components/Html";
 import NewsList from "../components/NewsList";
 import { h } from "preact";
+
 /** @jsx h */
 
 const Page = ({ news, page }) => (
@@ -16,7 +17,7 @@ export default async function renderPage(params, { page = 1 }) {
 
   const prefetchUrls = [
     `https://api.hackerwebapp.com/newest?page=${nextPage(page)}`,
-    `https://api.hackerwebapp.com/new?page=1`,
+    `https://api.hackerwebapp.com/news?page=1`,
     `https://api.hackerwebapp.com/show?page=1`,
     `https://api.hackerwebapp.com/ask?page=1`
   ];
