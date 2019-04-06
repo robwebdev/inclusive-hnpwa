@@ -1,8 +1,6 @@
 import Html from "../components/Html";
 import Main from "../components/Main";
-import { h } from "preact";
 import { render } from "../utils";
-/** @jsx h */
 
 const Page = () => (
   <Main className="p-m">

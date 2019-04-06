@@ -1,6 +1,4 @@
 import ConnectionStatus from "./ConnectionStatus";
-import { h } from "preact";
-/** @jsx h */
 
 function isCurrentPage(title = "", current = "") {
   return title === current ? "page" : false;

@@ -1,7 +1,5 @@
 import ItemMeta from "./ItemMeta";
-import { h } from "preact";
 import { pluralize } from "../utils";
-/** @jsx h */
 
 const getItemTitleHref = item =>
   item.type === "link" ? item.url : `/item/${item.id}`;

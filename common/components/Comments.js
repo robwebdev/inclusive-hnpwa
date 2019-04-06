@@ -1,6 +1,4 @@
-import { h } from "preact";
 import { pluralize } from "../utils";
-/** @jsx h */
 
 const Container = ({ comments, comments_count }) => (
   <section>

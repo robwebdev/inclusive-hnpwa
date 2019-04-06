@@ -1,5 +1,4 @@
-import { Component, h } from "preact";
-/** @jsx h */
+import { Component } from "preact";
 
 export default class extends Component {
   componentDidMount() {

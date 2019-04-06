@@ -3,9 +3,6 @@ import { nextPage, render } from "../utils";
 
 import Html from "../components/Html";
 import NewsList from "../components/NewsList";
-import { h } from "preact";
-
-/** @jsx h */
 
 const Page = ({ news, page }) => (
   <NewsList news={news} page={page} heading="Newest" />

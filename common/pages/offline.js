@@ -1,11 +1,8 @@
 import Html from "../components/Html";
 import Main from "../components/Main";
-import NewsList from "../components/NewsList";
 import NewsListItem from "../components/NewsListItem";
 import { getOfflineCache } from "../fetch";
-import { h } from "preact";
 import { render } from "../utils";
-/** @jsx h */
 
 const Page = ({ news }) => (
   <Main className>

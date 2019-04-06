@@ -1,9 +1,7 @@
 import Html from "../components/Html";
 import NewsList from "../components/NewsList";
 import { apiFetch } from "../fetch";
-import { h } from "preact";
 import { render } from "../utils";
-/** @jsx h */
 
 const Page = ({ news, page }) => (
   <NewsList news={news} page={page} heading="Ask HN" />
