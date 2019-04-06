@@ -2,148 +2,142 @@ import { LONG_LIVED_OFFLINE_BACK_CACHE } from "../common/utils";
 import app from "../common/app";
 import routeMatcher from "route-matcher";
 
-const SWVERSION = "v0.1.133";
+const SWVERSION = "v0.1.145";
 const navigationHandler = handleNavigationRequest(app, {
-  serviceWorkerVersion: SWVERSION
+    serviceWorkerVersion: SWVERSION
 });
 
 const appShellURLs = ["/index.css", "/manifest.json", "/client.js"];
 const SHELL_CACHE = `${SWVERSION}-shell`;
 
 self.addEventListener("install", event => {
-  event.waitUntil(cacheShellAssets());
-  self.skipWaiting();
+    event.waitUntil(cacheShellAssets());
+    self.skipWaiting();
 });
 
 self.addEventListener("activate", event => {
-  clearCaches(event);
+    clearCaches(event);
 });
 
 self.addEventListener("fetch", event => {
-  return navigationHandler(event, unhandledEvent => {
-    return event.respondWith(handleNonNavigationRequest(unhandledEvent));
-  });
+    return navigationHandler(event, unhandledEvent => {
+        return event.respondWith(handleNonNavigationRequest(unhandledEvent));
+    });
 });
 
 async function handleNonNavigationRequest(event) {
-  const url = new URL(event.request.url);
-  if (appShellURLs.indexOf(url.pathname) !== -1) {
-    try {
-      return caches.match(event.request);
-    } catch (e) {
-      return fetch(event.request);
+    const url = new URL(event.request.url);
+    if (appShellURLs.indexOf(url.pathname) !== -1) {
+        try {
+            return caches.match(event.request);
+        } catch (e) {
+            return fetch(event.request);
+        }
+    } else {
+        return fetch(event.request.url);
     }
-  } else {
-    return fetch(event.request.url);
-  }
 }
 
 function clearCaches(event) {
-  return event.waitUntil(
-    caches.keys().then(cacheKeys => {
-      const oldKeys = cacheKeys.filter(
-        key =>
-          key.indexOf(`${SWVERSION}-`) !== 0 &&
-          key !== LONG_LIVED_OFFLINE_BACK_CACHE
-      );
-      console.info("cleared cache keys:", oldKeys);
-      const deletePromises = oldKeys.map(oldKey => caches.delete(oldKey));
-      return Promise.all(deletePromises);
-    })
-  );
+    return event.waitUntil(
+        caches.keys().then(cacheKeys => {
+            const oldKeys = cacheKeys.filter(
+                key =>
+                key.indexOf(`${SWVERSION}-`) !== 0 &&
+                key !== LONG_LIVED_OFFLINE_BACK_CACHE
+            );
+            console.info("cleared cache keys:", oldKeys);
+            const deletePromises = oldKeys.map(oldKey => caches.delete(oldKey));
+            return Promise.all(deletePromises);
+        })
+    );
 }
 
 async function cacheShellAssets() {
-  const cache = await caches.open(SHELL_CACHE);
-  return cache.addAll(appShellURLs);
+    const cache = await caches.open(SHELL_CACHE);
+    return cache.addAll(appShellURLs);
 }
 
-function handleNavigationRequest(
-  { routes, notFound, offline },
-  { serviceWorkerVersion }
-) {
-  const routesWithMatcher = routes.map(route => ({
-    ...route,
-    matcher: routeMatcher.routeMatcher(route.path)
-  }));
+function handleNavigationRequest({ routes, notFound, offline }, { serviceWorkerVersion }) {
+    const routesWithMatcher = routes.map(route => ({
+        ...route,
+        matcher: routeMatcher.routeMatcher(route.path)
+    }));
 
-  function matchRoute(url) {
-    const match = routesWithMatcher.find(({ matcher }) =>
-      matcher.parse(url.pathname)
-    );
-    return match;
-  }
-
-  return function(event, cb) {
-    if (event.request.mode === "navigate") {
-      event.respondWith(
-        handleNavigateRequest(event, matchRoute, notFound, offline).then(
-          response => {
-            caches.delete("prefetch-cache");
-            return response;
-          }
-        )
-      );
-      console.log("clearing prefetch-cache");
-    } else {
-      return cb(event);
+    function matchRoute(url) {
+        const match = routesWithMatcher.find(({ matcher }) =>
+            matcher.parse(url.pathname)
+        );
+        return match;
     }
-  };
+
+    return function(event, cb) {
+        if (event.request.mode === "navigate") {
+            event.respondWith(
+                handleNavigateRequest(event, matchRoute, notFound, offline).then(
+                    response => {
+                        caches.delete("prefetch-cache");
+                        return response;
+                    }
+                )
+            );
+            console.log("clearing prefetch-cache");
+        } else {
+            return cb(event);
+        }
+    };
 }
 
 async function handleNavigateRequest(event, matchRoute, notFound, offline) {
-  try {
-    return await matchRouteAndRenderResponse(event, matchRoute, notFound);
-  } catch (e) {
-    console.error(e);
-    console.warn("Failed to render on the service worker");
-    return await respondFromCacheOrOffline(event, offline);
-  }
+    try {
+        return await matchRouteAndRenderResponse(event, matchRoute, notFound);
+    } catch (e) {
+        console.error(e);
+        console.warn("Failed to render on the service worker");
+        return await respondFromCacheOrOffline(event, offline);
+    }
 }
 
 async function matchRouteAndRenderResponse(event, matchRoute, notFound) {
-  const url = new URL(event.request.url);
-  const query = getQueryFromUrl(url);
-  const match = matchRoute(url);
-  if (match) {
-    const promise = match.render(match.matcher.parse(url.pathname), query);
-    event.waitUntil(promise);
-    let body = await promise;
-    console.info("Response rendered on service worker");
-    const response = new Response(body, {
-      headers: { "Content-Type": "text/html" }
-    });
-    return response;
-  } else {
-    const promise = notFound();
-    event.waitUntil(promise);
-    let body = await promise;
-    const response = new Response(body, {
-      status: 404,
-      headers: { "Content-Type": "text/html" }
-    });
-    return response;
-  }
+    const url = new URL(event.request.url);
+    const query = getQueryFromUrl(url);
+    const match = matchRoute(url);
+    if (match) {
+        console.log(event.request.headers.get("Referer"));
+        const body = await match.render(match.matcher.parse(url.pathname), query);
+        console.info("Response rendered on service worker");
+        const response = new Response(body, {
+            headers: { "Content-Type": "text/html" }
+        });
+        return response;
+    } else {
+        const body = await notFound();
+        const response = new Response(body, {
+            status: 404,
+            headers: { "Content-Type": "text/html" }
+        });
+        return response;
+    }
 }
 
 function getQueryFromUrl(url) {
-  const query = {};
-  for (const entry of url.searchParams.entries()) {
-    query[entry[0]] = entry[1];
-  }
-  return query;
+    const query = {};
+    for (const entry of url.searchParams.entries()) {
+        query[entry[0]] = entry[1];
+    }
+    return query;
 }
 
 function respondFromCacheOrOffline(event, offline) {
-  return caches.match(event.request).then(async response => {
-    if (!response) {
-      console.info("Not found in cache, returning offline response");
-      const body = await offline();
-      return new Response(body, {
-        headers: { "Content-Type": "text/html" }
-      });
-    }
-    console.info("Response found in cache");
-    return response;
-  });
+    return caches.match(event.request).then(async response => {
+        if (!response) {
+            console.info("Not found in cache, returning offline response");
+            const body = await offline();
+            return new Response(body, {
+                headers: { "Content-Type": "text/html" }
+            });
+        }
+        console.info("Response found in cache");
+        return response;
+    });
 }
