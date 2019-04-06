@@ -103,7 +103,7 @@ export default ({ children, title, offline }) => (
         <a href="#main" class="skip-link">
           Skip to main content
         </a>
-        <p class="logo font-bold font-sans-serif ph-m pt-m">
+        <p class="logo font-bold font-sans-serif ph-m pt-m pb-s">
           Hacker News PWA<span class="text-subtle"> - Inclusive Edition</span>
         </p>
         <nav class="main-nav font-sans-serif ph-s">
@@ -142,6 +142,15 @@ export default ({ children, title, offline }) => (
                 aria-current={isCurrentPage(title, "Ask")}
               >
                 Ask
+              </a>
+            </li>
+            <li class="main-nav__list-item">
+              <a
+                href="/jobs"
+                class="pv-s ph-s block main-nav__link"
+                aria-current={isCurrentPage(title, "Jobs")}
+              >
+                Jobs
               </a>
             </li>
           </ul>

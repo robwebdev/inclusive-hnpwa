@@ -4,6 +4,7 @@ import { pluralize } from "../utils";
 
 export default ({ item }) => (
   <span class="item-meta font-sans-serif">
-    {pluralize(item.points, "point")} by {item.user} {item.time_ago}
+    {item.points !== null && pluralize(item.points, "point")}{" "}
+    {item.user && `by ${item.user}`} {item.time_ago}
   </span>
 );

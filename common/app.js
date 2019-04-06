@@ -2,6 +2,7 @@ import AskPage from "./pages/ask";
 import ErrorPage from "./pages/error";
 import IndexPage from "./pages/index";
 import ItemPage from "./pages/item";
+import JobsPage from "./pages/jobs";
 import NewestPage from "./pages/new";
 import NotFoundPage from "./pages/not-found";
 import OfflinePage from "./pages/offline";
@@ -24,6 +25,10 @@ export default {
     {
       path: "/show",
       render: ShowPage
+    },
+    {
+      path: "/jobs",
+      render: JobsPage
     },
     {
       path: "/item/:id",

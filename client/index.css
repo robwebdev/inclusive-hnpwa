@@ -16,6 +16,10 @@ main *+* {
     padding: 8px;
 }
 
+.pb-s {
+    padding-bottom: 8px;
+}
+
 .pt-s {
     padding-top: 8px;
 }
