@@ -99,14 +99,14 @@ export default ({ children, title, offline }) => (
       />
     </head>
     <body>
-      <header id="main-header">
-        <nav class="main-nav font-sans-serif ph-s pt-s">
-          <a href="#main" class="skip-link">
-            Skip to main content
-          </a>
-          <p class="logo font-bold ph-s pt-s">
-            Hacker News PWA<span class="text-subtle"> - Inclusive Edition</span>
-          </p>
+      <header id="main-header" class="main-header">
+        <a href="#main" class="skip-link">
+          Skip to main content
+        </a>
+        <p class="logo font-bold font-sans-serif ph-m pt-m">
+          Hacker News PWA<span class="text-subtle"> - Inclusive Edition</span>
+        </p>
+        <nav class="main-nav font-sans-serif ph-s">
           <ul class="main-nav__list horizontal">
             <li class="main-nav__list-item">
               <a

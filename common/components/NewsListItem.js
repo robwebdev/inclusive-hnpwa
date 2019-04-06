@@ -13,7 +13,6 @@ export default ({ item }) => (
         {item.title} {item.domain && <span class="url">({item.domain})</span>}
       </a>
     </h2>
-    <ItemMeta item={item} />
     <p>
       <a
         href={`/item/${item.id}`}
@@ -21,7 +20,10 @@ export default ({ item }) => (
       >
         {pluralize(item.comments_count, "comment")}
         <span class="visually-hidden"> on {item.title}</span>
-      </a>
+      </a>{" "}
+    </p>
+    <p class="news-list-item__meta">
+      <ItemMeta item={item} />
     </p>
   </li>
 );

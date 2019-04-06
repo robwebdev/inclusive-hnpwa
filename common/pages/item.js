@@ -23,7 +23,9 @@ const Page = ({ item }) => (
         </a>
       )}
     </h1>
-    <ItemMeta item={item} />
+    <p>
+      <ItemMeta item={item} />
+    </p>
     {item.content && <div dangerouslySetInnerHTML={{ __html: item.content }} />}
     <Comments comments={item.comments} comments_count={item.comments_count} />
   </Main>
