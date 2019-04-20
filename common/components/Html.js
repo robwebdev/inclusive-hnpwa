@@ -11,9 +11,7 @@ export default ({ children, title, offline }) => (
     <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>
-        {title ? title + " - " : ""}Hacker News PWA - Inclusive Edition
-      </title>
+      <title>{title ? title + " - " : ""}Hacker News</title>
       <meta
         name="Description"
         content="An inclusive Hacker News PWA implementation."
@@ -103,9 +101,7 @@ export default ({ children, title, offline }) => (
         <a href="#main" class="skip-link">
           Skip to main content
         </a>
-        <p class="logo font-bold font-sans-serif ph-m pt-m pb-s">
-          Hacker News PWA<span class="text-subtle"> - Inclusive Edition</span>
-        </p>
+        <p class="logo font-bold font-sans-serif ph-m pt-m pb-s">Hacker News</p>
         <nav class="main-nav font-sans-serif ph-s">
           <ul class="main-nav__list horizontal">
             <li class="main-nav__list-item">
