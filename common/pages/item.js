@@ -3,7 +3,9 @@ import Html from "../components/Html";
 import ItemMeta from "../components/ItemMeta";
 import Main from "../components/Main";
 import { apiFetch } from "../fetch";
+import { h } from "preact";
 import { render } from "../utils";
+/** @jsx h */
 
 const Page = ({ item }) => (
   <Main className="p-m">

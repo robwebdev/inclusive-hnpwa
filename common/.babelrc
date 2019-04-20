@@ -1,13 +1,3 @@
 {
-  "plugins": [
-    ["@babel/plugin-transform-react-jsx", { "pragma": "h" }],
-    [
-      "babel-plugin-jsx-pragmatic",
-      {
-        "module": "preact",
-        "export": "h",
-        "import": "h"
-      }
-    ]
-  ]
+  "plugins": ["@babel/plugin-transform-react-jsx"]
 }
