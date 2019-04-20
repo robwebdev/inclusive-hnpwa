@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="412px" height="412px" viewBox="0 0 412 412" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Logo</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Logo">
+            <rect id="Rectangle" stroke="#979797" stroke-width="1" fill="#B84E02" fill-rule="evenodd" x="0.5" y="0.5" width="411" height="411"></rect>
+            <text id="HN" font-family="AndaleMono, Andale Mono" font-size="225" font-weight="normal" letter-spacing="-7.62710905" fill="#FFFFFF">
+                <tspan x="78.6051364" y="204">HN</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
