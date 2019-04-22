@@ -305,7 +305,7 @@ ul .news-list-item {
 }
 
 .comments-list__item-content pre {
-  overflow-x: auto;
+  white-space: pre-wrap;
 }
 
 .main-footer {
