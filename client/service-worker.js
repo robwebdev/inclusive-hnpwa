@@ -2,7 +2,7 @@ import { LONG_LIVED_OFFLINE_BACK_CACHE } from "../common/utils";
 import app from "../common/app";
 import routeMatcher from "route-matcher";
 
-const SWVERSION = "v0.1.161";
+const SWVERSION = "v0.1.162";
 const navigationHandler = handleNavigationRequest(app, {
   serviceWorkerVersion: SWVERSION
 });
