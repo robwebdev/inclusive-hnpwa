@@ -1,24 +1,18 @@
-import Html from "../components/Html";
-import Main from "../components/Main";
-import { h } from "preact";
-import { render } from "../utils";
-/** @jsx h */
+import layout from "../components/layout";
+import main from "../components/main";
 
-const Page = () => (
-  <Main className="p-m">
-    <h1>Sorry we couldn't find that page.</h1>
-    <p>
-      Maybe something went wrong our end, or you visited a URL that doesn't
-      exists.
-    </p>
-  </Main>
-);
-
-export default async function renderPage() {
+export default function renderPage({ html }) {
   const title = "Not Found - Hacker News";
-  return render(
-    <Html title={title}>
-      <Page />
-    </Html>
+  const body = main(
+    html,
+    html`
+      <h1>Sorry we couldn't find that page.</h1>
+      <p>
+        Maybe something went wrong our end, or you visited a URL that doesn't
+        exists.
+      </p>
+    `,
+    { className: "p-m" }
   );
+  return layout(html, { body, title });
 }

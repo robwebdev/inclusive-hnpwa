@@ -1,5 +1,11 @@
 import "isomorphic-fetch";
 
+import {
+  html,
+  renderToStream,
+  renderToString
+} from "@popeindustries/lit-html-server";
+
 import appConfig from "./common/app";
 import express from "express";
 
@@ -13,18 +19,17 @@ function wrapApp(app, { routes, notFound, error }) {
   routes.forEach(({ path, render }) => {
     app.get(path, async (req, res) => {
       try {
-        const rendered = await render(req.params, req.query);
-        res.send(rendered);
+        renderToStream(render({ html }, req.params, req.query)).pipe(res);
       } catch (e) {
         console.error(e);
-        const rendered = await error();
+        const rendered = await renderToString(error({ html }));
         res.status(500).send(rendered);
       }
     });
   });
 
   app.use(async (req, res) => {
-    const rendered = await notFound();
+    const rendered = await renderToString(notFound({ html }));
     res.status(404).send(rendered);
   });
 

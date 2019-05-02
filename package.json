@@ -6,30 +6,30 @@
   "module": "main.js",
   "scripts": {
     "build": "npx parcel build ./client/service-worker.js ./client/index.css ./client/client.js -d dist",
-    "start": "npx babel-node index.js",
-    "dev": "concurrently 'npx babel-node index.js' 'npx parcel ./client/index.css ./client/service-worker.js ./client/client.js'",
+    "start": "node index.js",
+    "dev": "concurrently 'node index.js' 'npx parcel ./client/index.css ./client/service-worker.js ./client/client.js'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "now && now alias"
   },
   "author": "Rob Chandler",
   "license": "ISC",
   "dependencies": {
+    "@popeindustries/lit-html-server": "^1.2.0",
     "es6-promise": "^4.2.6",
     "esm": "^3.2.18",
     "express": "^4.16.4",
     "isomorphic-fetch": "^2.2.1",
-    "preact": "^8.4.2",
-    "preact-render-to-string": "^4.1.0",
     "route-matcher": "^0.1.0"
   },
   "browserslist": [
     "since 2017-06"
   ],
   "devDependencies": {
-    "@babel/core": "^7.3.3",
-    "@babel/node": "^7.2.2",
-    "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "@babel/core": "^7.4.4",
     "concurrently": "^4.1.0",
     "cssnano": "^4.1.10"
+  },
+  "engines": {
+    "node": ">=10"
   }
 }

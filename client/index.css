@@ -101,6 +101,7 @@ h2 {
 p,
 li {
   max-width: 60ch;
+  word-break: break-word;
 }
 
 h1,
@@ -169,8 +170,8 @@ a:focus {
   padding: 8px 16px;
 }
 
-.offline-message + .main-nav {
-  border-top: none;
+.offline-message + .news-list__header {
+  margin-top: 0;
 }
 
 .main-header {

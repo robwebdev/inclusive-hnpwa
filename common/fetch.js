@@ -11,15 +11,6 @@ async function matchInPrefetchCache(requestUrl) {
   }
 }
 
-export async function prefetch(url) {
-  if (typeof caches !== "undefined") {
-    const response = await fetchAndCacheForOffline(url);
-    const cache = await caches.open(SHORT_LIVED_PREFETCH_CACHE);
-    console.info("Cached in short lived prefetch cache", url);
-    return cache.put(url, response.clone());
-  }
-}
-
 export function getOfflineCache() {
   if (typeof caches !== "undefined") {
     return caches.open(LONG_LIVED_OFFLINE_BACK_CACHE);
@@ -53,28 +44,18 @@ async function matchInOfflineCache(requestUrl) {
 export async function apiFetch(requestUrl) {
   let response, data;
   let isOffline = false;
-  const prefetchReponse = await matchInPrefetchCache(requestUrl);
 
-  if (prefetchReponse) {
-    console.info(
-      "Matched response in short lived prefetch-cache",
-      prefetchReponse
-    );
-    response = prefetchReponse;
-  } else {
-    console.info("No match in short lived prefetch-cache");
-    try {
-      response = await fetchAndCacheForOffline(requestUrl);
-    } catch (e) {
-      console.error(e);
-      const matchedOfflineResponse = await matchInOfflineCache(requestUrl);
-      if (matchedOfflineResponse) {
-        isOffline = true;
-        response = matchedOfflineResponse;
-      } else {
-        console.warn("No cache match for " + requestUrl);
-        throw new Error("Failed to fetch page");
-      }
+  try {
+    response = await fetchAndCacheForOffline(requestUrl);
+  } catch (e) {
+    console.error(e);
+    const matchedOfflineResponse = await matchInOfflineCache(requestUrl);
+    if (matchedOfflineResponse) {
+      isOffline = true;
+      response = matchedOfflineResponse;
+    } else {
+      console.warn("No cache match for " + requestUrl);
+      throw new Error("Failed to fetch page");
     }
   }
 

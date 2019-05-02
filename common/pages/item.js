@@ -1,42 +1,47 @@
-import Comments from "../components/Comments";
-import Html from "../components/Html";
-import ItemMeta from "../components/ItemMeta";
-import Main from "../components/Main";
 import { apiFetch } from "../fetch";
-import { h } from "preact";
-import { render } from "../utils";
-/** @jsx h */
+import comments from "../components/comments";
+import itemMeta from "../components/itemMeta";
+import layout from "../components/layout";
+import main from "../components/main";
+import { offlineBody } from "./offline";
+import { unsafeHTML } from "@popeindustries/lit-html-server/directives/unsafe-html";
 
-const Page = ({ item }) => (
-  <Main className="p-m">
-    <h1>
-      {item.type === "ask" ? (
-        item.title
-      ) : (
-        <a href={item.url}>
-          {item.title}{" "}
-          {item.domain && (
-            <span>
-              <br />({item.domain})
-            </span>
-          )}
-        </a>
-      )}
-    </h1>
-    <p>
-      <ItemMeta item={item} />
-    </p>
-    {item.content && <div dangerouslySetInnerHTML={{ __html: item.content }} />}
-    <Comments comments={item.comments} comments_count={item.comments_count} />
-  </Main>
-);
+async function renderBody(html, id) {
+  const requestUrl = `https://api.hackerwebapp.com/item/${id}`;
+  let item;
+  let isOffline;
+  try {
+    let result = await apiFetch(requestUrl);
+    item = result.data;
+    isOffline = result.isOffline;
+  } catch (e) {
+    return offlineBody(html);
+  }
 
-export default async function renderPage(params) {
-  const requestUrl = `https://api.hackerwebapp.com/item/${params.id}`;
-  const { data, isOffline } = await apiFetch(requestUrl);
-  return render(
-    <Html title={data.title} offline={isOffline}>
-      <Page item={data} />
-    </Html>
+  return main(
+    html,
+    html`
+      <h1>
+        ${item.type === "ask"
+          ? item.title
+          : html`
+              <a href="${item.url}">
+                ${item.title}${" "}
+                ${item.domain &&
+                  html`
+                    <span> <br />(${item.domain}) </span>
+                  `}
+              </a>
+            `}
+      </h1>
+      <p>${itemMeta(html, { item })}</p>
+      ${item.content && unsafeHTML(item.content)} ${comments(html, item)}
+    `,
+    { className: "p-m", isOffline }
   );
+}
+
+export default async function renderPage({ html }, params) {
+  const body = renderBody(html, params.id);
+  return layout(html, { body, title: "Item" });
 }
