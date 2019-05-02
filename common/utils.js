@@ -1,5 +1,3 @@
-import { render as preactRender } from "preact-render-to-string";
-
 export const LONG_LIVED_OFFLINE_BACK_CACHE = "offline-backup-cache";
 export const SHORT_LIVED_PREFETCH_CACHE = "prefetch-cache";
 
@@ -9,8 +7,4 @@ export function pluralize(count, word) {
 
 export function nextPage(page) {
   return parseInt(page, 10) + 1;
-}
-
-export function render(component) {
-  return "<!doctype html>" + preactRender(component);
 }

@@ -1,22 +1,20 @@
-import Html from "../components/Html";
-import NewsList from "../components/NewsList";
 import { apiFetch } from "../fetch";
-import { h } from "preact";
-import { render } from "../utils";
+import layout from "../components/layout";
+import newsList from "../components/newsList";
+import { nextPage } from "../utils";
+import { offlineBody } from "./offline";
 
-/** @jsx h */
-
-const Page = ({ news, page }) => (
-  <NewsList news={news} page={page} heading="Jobs" />
-);
-
-export default async function renderPage(params, { page = 1 }) {
+async function renderBody(html, page = "1") {
   const requestUrl = `https://api.hackerwebapp.com/jobs?page=${page}`;
-  const { data, isOffline } = await apiFetch(requestUrl);
+  try {
+    const { data, isOffline } = await apiFetch(requestUrl);
+    return newsList(html, { news: data, page, heading: "Jobs", isOffline });
+  } catch (e) {
+    return offlineBody(html);
+  }
+}
 
-  return render(
-    <Html title="Jobs" offline={isOffline}>
-      <Page news={data} page={page} />
-    </Html>
-  );
+export default async function renderPage({ html }, params, { page = "1" }) {
+  const body = renderBody(html, page);
+  return layout(html, { body, title: "Jobs" });
 }

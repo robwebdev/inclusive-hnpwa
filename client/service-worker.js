@@ -1,8 +1,10 @@
+import { html, renderToStream } from "@popeindustries/lit-html-server/browser";
+
 import { LONG_LIVED_OFFLINE_BACK_CACHE } from "../common/utils";
 import app from "../common/app";
 import routeMatcher from "route-matcher";
 
-const SWVERSION = "v0.1.162";
+const SWVERSION = "v0.2.7";
 const navigationHandler = handleNavigationRequest(app, {
   serviceWorkerVersion: SWVERSION
 });
@@ -58,10 +60,7 @@ async function cacheShellAssets() {
   return cache.addAll(appShellURLs);
 }
 
-function handleNavigationRequest(
-  { routes, notFound, offline },
-  { serviceWorkerVersion }
-) {
+function handleNavigationRequest({ routes, notFound, offline }) {
   const routesWithMatcher = routes.map(route => ({
     ...route,
     matcher: routeMatcher.routeMatcher(route.path)
@@ -77,14 +76,8 @@ function handleNavigationRequest(
   return function(event, cb) {
     if (event.request.mode === "navigate") {
       event.respondWith(
-        handleNavigateRequest(event, matchRoute, notFound, offline).then(
-          response => {
-            caches.delete("prefetch-cache");
-            return response;
-          }
-        )
+        handleNavigateRequest(event, matchRoute, notFound, offline)
       );
-      console.log("clearing prefetch-cache");
     } else {
       return cb(event);
     }
@@ -106,15 +99,19 @@ async function matchRouteAndRenderResponse(event, matchRoute, notFound) {
   const query = getQueryFromUrl(url);
   const match = matchRoute(url);
   if (match) {
-    console.log(event.request.headers.get("Referer"));
-    const body = await match.render(match.matcher.parse(url.pathname), query);
+    const rendered = await match.render(
+      { html },
+      match.matcher.parse(url.pathname),
+      query
+    );
+    const body = renderToStream(rendered);
     console.info("Response rendered on service worker");
     const response = new Response(body, {
       headers: { "Content-Type": "text/html" }
     });
     return response;
   } else {
-    const body = await notFound();
+    const body = await renderToStream(notFound({ html }));
     const response = new Response(body, {
       status: 404,
       headers: { "Content-Type": "text/html" }
@@ -132,10 +129,11 @@ function getQueryFromUrl(url) {
 }
 
 function respondFromCacheOrOffline(event, offline) {
+  console.log(event, offline);
   return caches.match(event.request).then(async response => {
     if (!response) {
       console.info("Not found in cache, returning offline response");
-      const body = await offline();
+      const body = renderToStream(offline({ html }));
       return new Response(body, {
         headers: { "Content-Type": "text/html" }
       });

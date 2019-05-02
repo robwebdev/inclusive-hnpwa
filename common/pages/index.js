@@ -1,31 +1,21 @@
-import { apiFetch, prefetch } from "../fetch";
-import { nextPage, render } from "../utils";
+import { apiFetch } from "../fetch";
+import layout from "../components/layout";
+import newsList from "../components/newsList";
+import { nextPage } from "../utils";
+import { offlineBody } from "./offline";
 
-import Html from "../components/Html";
-import NewsList from "../components/NewsList";
-import { h } from "preact";
-
-/** @jsx h */
-
-const Page = ({ news, page }) => (
-  <NewsList news={news} page={page} heading="Top" />
-);
-
-export default async function renderPage(params, { page = "1" }) {
+async function renderBody(html, page = "1") {
   const requestUrl = `https://api.hackerwebapp.com/news?page=${page}`;
-  const { data, isOffline } = await apiFetch(requestUrl);
-  const prefetchUrls = [
-    `https://api.hackerwebapp.com/news?page=${nextPage(page)}`,
-    `https://api.hackerwebapp.com/newest?page=1`,
-    `https://api.hackerwebapp.com/show?page=1`,
-    `https://api.hackerwebapp.com/ask?page=1`
-  ];
+  try {
+    const { data, isOffline } = await apiFetch(requestUrl);
+    return newsList(html, { news: data, page, heading: "Top", isOffline });
+  } catch (e) {
+    console.log(e);
+    return offlineBody(html);
+  }
+}
 
-  prefetchUrls.map(url => prefetch(url));
-
-  return render(
-    <Html offline={isOffline}>
-      <Page news={data} page={page} />
-    </Html>
-  );
+export default async function renderPage({ html }, params, { page = "1" }) {
+  const body = renderBody(html, page);
+  return layout(html, { body });
 }

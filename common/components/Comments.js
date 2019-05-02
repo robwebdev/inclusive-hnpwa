@@ -1,39 +1,44 @@
-import { h } from "preact";
 import { pluralize } from "../utils";
-/** @jsx h */
+import { unsafeHTML } from "@popeindustries/lit-html-server/directives/unsafe-html";
 
-const Container = ({ comments, comments_count }) => (
-  <section>
-    {comments_count > 0 && <h2>{pluralize(comments_count, "comment")}</h2>}
-    {comments_count > 0 && <Comments comments={comments} />}
-    {comments_count === 0 && <p>This story has no comments</p>}
-  </section>
-);
+const container = (html, { comments, comments_count }) =>
+  html`
+    <section>
+      ${comments_count > 0
+        ? html`
+            <h2>${pluralize(comments_count, "comment")}</h2>
+          `
+        : ""}
+      ${comments_count > 0 ? commentsList(html, { comments }) : ""}
+      ${comments_count === 0
+        ? html`
+            <p>This story has no comments</p>
+          `
+        : ""}
+    </section>
+  `;
 
-const Comments = ({ comments }) => (
-  <section>
+function commentsList(html, { comments }) {
+  return html`
     <ul class="comments-list">
-      {comments.map(comment => (
-        <Comment comment={comment} />
-      ))}
+      ${comments.map(c => comment(html, c))}
     </ul>
-  </section>
-);
+  `;
+}
 
-const Comment = ({ comment }) => (
-  <li class="comments-list__item">
-    <article>
+function comment(html, comment) {
+  return html`
+    <li class="comments-list__item">
       <p class="item-meta font-sans-serif">
-        {comment.level === 0 ? "Comment" : "Reply"} by {comment.user}{" "}
-        {comment.time_ago}
+        ${comment.level === 0 ? "Comment" : "Reply"} by ${comment.user}${" "}
+        ${comment.time_ago}
       </p>
-      <div
-        dangerouslySetInnerHTML={{ __html: comment.content }}
-        class="comments-list__item-content"
-      />
-      <Comments comments={comment.comments} />
-    </article>
-  </li>
-);
+      <div class="comments-list__item-content">
+        ${unsafeHTML(comment.content)}
+      </div>
+      ${commentsList(html, { comments: comment.comments })}
+    </li>
+  `;
+}
 
-export default Container;
+export default container;
