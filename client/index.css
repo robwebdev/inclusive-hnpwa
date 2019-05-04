@@ -88,7 +88,8 @@ html {
 
 body {
   margin: 0;
-  font-family: georgia, serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   color: #2f2822;
   min-height: 100vh;
   display: grid;
@@ -120,8 +121,6 @@ h3,
 h4,
 h5,
 .font-sans-serif {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   line-height: 1.2;
   word-break: break-word;
 }
@@ -260,7 +259,7 @@ a:focus path {
 .item-meta,
 .text-smaller {
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: #22292f;
 }
 
@@ -269,10 +268,6 @@ a:focus path {
   margin-top: 16px;
   border-top: 2px solid #f1f5f8;
   list-style: none;
-}
-
-.news-list-item > * {
-  order: 1;
 }
 
 .news-list-item * + * {
@@ -289,28 +284,24 @@ a:focus path {
   flex-direction: column;
 }
 
-.news-list-item__site-url {
-  margin-top: 0;
-  margin-bottom: 0.7rem;
-  order: 0;
-}
-
-.news-list-item__comments {
-  font-weight: bold;
+.news-list-item__counts a {
   text-decoration: none;
-  font-size: 0.9rem;
 }
 
 .news-list-item__meta {
   margin-top: 0;
 }
 
-.news-list-item__site-url {
+.news-list-item p + p {
+  margin-top: 0;
+}
+
+.item-domain__site-url {
   text-transform: uppercase;
   font-size: 0.8em;
 }
 
-.news-list-item__favicon {
+.item-domain__favicon {
   width: 16px;
   height: 16px;
   margin-bottom: -2px;
@@ -358,6 +349,11 @@ a:focus path {
 
 .comments-list__item {
   list-style: none;
+}
+
+.comments-list__item-content,
+.item-content {
+  font-family: georgia, serif;
 }
 
 .comments-list__item-content,

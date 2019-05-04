@@ -1,5 +1,6 @@
 import { apiFetch } from "../fetch";
 import comments from "../components/comments";
+import itemDomain from "../components/itemDomain";
 import itemMeta from "../components/itemMeta";
 import layout from "../components/layout";
 import main from "../components/main";
@@ -21,21 +22,21 @@ async function renderBody(html, id) {
   return main(
     html,
     html`
+      ${itemDomain({ html }, { item })}
       <h1>
         ${item.type === "ask"
           ? item.title
           : html`
-              <a href="${item.url}">
+              <a href="${item.url}" aria-describedby="item-domain-${item.id}">
                 ${item.title}${" "}
-                ${item.domain &&
-                  html`
-                    <span> <br />(${item.domain}) </span>
-                  `}
               </a>
             `}
       </h1>
       <p>${itemMeta(html, { item })}</p>
-      ${item.content && unsafeHTML(item.content)} ${comments(html, item)}
+      <div class="item-content">
+        ${item.content && unsafeHTML(item.content)}
+      </div>
+      ${comments(html, item)}
     `,
     { isOffline }
   );

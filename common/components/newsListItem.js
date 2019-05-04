@@ -1,3 +1,4 @@
+import itemDomain from "./itemDomain";
 import itemMeta from "./itemMeta";
 import { pluralize } from "../utils";
 
@@ -7,33 +8,21 @@ const getItemTitleHref = item =>
 export default (html, { item }) =>
   html`
     <li class="news-list-item">
+      ${itemDomain({ html }, { item })}
       <h2 class="news-list-item__title">
-        <a href="${getItemTitleHref(item)}">
+        <a
+          href="${getItemTitleHref(item)}"
+          aria-describedby="item-domain-${item.id}"
+        >
           ${item.title}
         </a>
       </h2>
-      ${item.domain
-        ? html`
-            <p class="news-list-item__site-url font-sans-serif">
-              <img
-                src="${`https://api.faviconkit.com/${item.domain}/16`}"
-                alt=""
-                class="news-list-item__favicon"
-              />
-              ${item.domain}
-            </p>
-          `
-        : ""}
       <p>${itemMeta(html, { item })}</p>
-      <p>
-        <a
-          href="/item/${item.id}"
-          class="font-sans-serif news-list-item__comments"
-        >
+      <p class="item-meta">
+        <a href="/item/${item.id}">
           ${pluralize(item.comments_count, "comment")}
-          <span class="visually-hidden"> on {item.title}</span>
-        </a>
+          <span class="visually-hidden"> on ${item.title}</span></a
+        >${" "} · ${item.points !== null ? pluralize(item.points, "point") : ""}
       </p>
-      <p class="news-list-item__meta"></p>
     </li>
   `;
