@@ -266,7 +266,7 @@ a:focus path {
 .news-list {
   padding: 0;
   margin-top: 16px;
-  border-top: 2px solid #f1f5f8;
+  border-top: 2px solid #e3edf5;
   list-style: none;
 }
 
@@ -277,7 +277,7 @@ a:focus path {
 .news-list-item {
   margin-top: 0;
   padding: 16px 0;
-  border-bottom: 2px solid #f1f5f8;
+  border-bottom: 2px solid #e3edf5;
   list-style-position: inside;
   max-width: none;
   display: flex;

@@ -22,7 +22,7 @@ export default (html, { item }) =>
         <a href="/item/${item.id}">
           ${pluralize(item.comments_count, "comment")}
           <span class="visually-hidden"> on ${item.title}</span></a
-        >${" "} · ${item.points !== null ? pluralize(item.points, "point") : ""}
+        >${item.points !== null ? " · " + pluralize(item.points, "point") : ""}
       </p>
     </li>
   `;
