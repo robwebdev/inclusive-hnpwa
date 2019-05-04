@@ -1,15 +1,6 @@
 import { NotFoundError } from "./error";
 
 export const LONG_LIVED_OFFLINE_BACK_CACHE = "offline-backup-cache";
-export const SHORT_LIVED_PREFETCH_CACHE = "prefetch-cache";
-
-async function matchInPrefetchCache(requestUrl) {
-  if (typeof caches !== "undefined") {
-    console.info("looking in short lived prefetch-cache");
-    const cache = await caches.open(SHORT_LIVED_PREFETCH_CACHE);
-    return cache.match(requestUrl);
-  }
-}
 
 export function getOfflineCache() {
   if (typeof caches !== "undefined") {

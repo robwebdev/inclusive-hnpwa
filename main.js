@@ -8,6 +8,7 @@ import {
 
 import appConfig from "./common/app";
 import express from "express";
+import request from "request";
 
 let app = express();
 app.use(express.static("dist"));
@@ -26,6 +27,10 @@ function wrapApp(app, { routes, notFound, error }) {
         res.status(500).send(rendered);
       }
     });
+  });
+
+  app.get("/favicon/:domain", async (req, res) => {
+    request(`http://cdn.staticaly.com/favicons/${req.params.domain}`).pipe(res);
   });
 
   app.use(async (req, res) => {

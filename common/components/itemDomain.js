@@ -3,9 +3,10 @@ export default function({ html }, { item }) {
     ? html`
         <p class="item-domain__site-url font-sans-serif">
           <img
-            src="${`https://cdn.staticaly.com/favicons/${item.domain}`}"
+            src="${`/favicon/${item.domain}`}"
             alt=""
             class="item-domain__favicon"
+            loading="lazy"
           />
           <span class="visually-hidden">External link to </span
           ><span id="item-domain-${item.id}">${item.domain}</span>

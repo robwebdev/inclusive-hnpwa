@@ -1,10 +1,11 @@
 import { html, renderToStream } from "@popeindustries/lit-html-server/browser";
 
-import { LONG_LIVED_OFFLINE_BACK_CACHE } from "../common/utils";
+import { LONG_LIVED_OFFLINE_BACK_CACHE } from "../common/fetch";
 import app from "../common/app";
+import { image } from "../common/icons";
 import routeMatcher from "route-matcher";
 
-const SWVERSION = "v0.2.22";
+const SWVERSION = "v0.2.41";
 const navigationHandler = handleNavigationRequest(app, {
   serviceWorkerVersion: SWVERSION
 });
@@ -35,9 +36,20 @@ async function handleNonNavigationRequest(event) {
     } catch (e) {
       return fetch(event.request);
     }
-  } else {
-    return fetch(event.request);
+  } else if (event.request.destination === "image") {
+    try {
+      const r = await fetch(event.request);
+      return r;
+    } catch (e) {
+      console.log(e);
+      return new Response(renderToStream(image({ html })), {
+        headers: {
+          "Content-Type": "image/svg+xml"
+        }
+      });
+    }
   }
+  return await fetch(event.request);
 }
 
 function clearCaches(event) {
