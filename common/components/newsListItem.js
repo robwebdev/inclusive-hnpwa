@@ -10,12 +10,20 @@ export default (html, { item }) =>
       <h2 class="news-list-item__title">
         <a href="${getItemTitleHref(item)}">
           ${item.title}
-          ${item.domain &&
-            html`
-              <span class="url">(${item.domain})</span>
-            `}
         </a>
       </h2>
+      ${item.domain
+        ? html`
+            <p class="news-list-item__site-url font-sans-serif">
+              <img
+                src="${`https://api.faviconkit.com/${item.domain}/16`}"
+                alt=""
+                class="news-list-item__favicon"
+              />
+              ${item.domain}
+            </p>
+          `
+        : ""}
       <p>${itemMeta(html, { item })}</p>
       <p>
         <a
