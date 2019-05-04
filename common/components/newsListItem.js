@@ -12,7 +12,7 @@ export default (html, { item }) =>
       <h2 class="news-list-item__title">
         <a
           href="${getItemTitleHref(item)}"
-          aria-describedby="item-domain-${item.id}"
+          ?aria-describedby="${item.domain && `item-domain-${item.id}`}"
         >
           ${item.title}
         </a>

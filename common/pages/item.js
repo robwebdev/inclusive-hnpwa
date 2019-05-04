@@ -27,7 +27,10 @@ async function renderBody(html, id) {
         ${item.type === "ask"
           ? item.title
           : html`
-              <a href="${item.url}" aria-describedby="item-domain-${item.id}">
+              <a
+                href="${item.url}"
+                ?aria-describedby="${item.domain && `item-domain-${item.id}`}"
+              >
                 ${item.title}${" "}
               </a>
             `}
