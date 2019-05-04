@@ -48,12 +48,10 @@ export default (html, { news, page = 1, heading, isOffline }) =>
           </nav>
         `
       : html`
-          <div class="p-m">
-            <h1>Uh oh</h1>
-            <p>
-              It looks like we've run out of items to show in this section.
-            </p>
-          </div>
+          <h1>Uh oh</h1>
+          <p>
+            It looks like we've run out of items to show in this section.
+          </p>
         `,
     { isOffline }
   );
