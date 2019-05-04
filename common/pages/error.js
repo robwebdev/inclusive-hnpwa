@@ -8,8 +8,7 @@ export default function renderPage({ html }) {
     html`
       <h1>Oh dear.</h1>
       <p>Something went wrong with this page. Sorry!</p>
-    `,
-    { className: "p-m" }
+    `
   );
   return layout(html, { body, title });
 }

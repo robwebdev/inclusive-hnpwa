@@ -37,7 +37,7 @@ async function renderBody(html, id) {
       <p>${itemMeta(html, { item })}</p>
       ${item.content && unsafeHTML(item.content)} ${comments(html, item)}
     `,
-    { className: "p-m", isOffline }
+    { isOffline }
   );
 }
 

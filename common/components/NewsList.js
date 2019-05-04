@@ -6,12 +6,10 @@ export default (html, { news, page = 1, heading, isOffline }) =>
     html,
     news.length > 0
       ? html`
-          <div class="news-list__header p-m">
-            <h1 class="text-smaller">
-              ${heading} - Items ${1 + news.length * (page - 1)} to
-              ${news.length * page}
-            </h1>
-          </div>
+          <h1 class="text-smaller">
+            ${heading} - Items ${1 + news.length * (page - 1)} to
+            ${news.length * page}
+          </h1>
           <ol start="${1 + news.length * (page - 1)}" class="news-list">
             ${news.map(item => newsListItem(html, { item }))}
           </ol>

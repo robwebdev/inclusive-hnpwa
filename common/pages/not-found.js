@@ -11,8 +11,7 @@ export default function renderPage({ html }) {
         Maybe something went wrong our end, or you visited a URL that doesn't
         exists.
       </p>
-    `,
-    { className: "p-m" }
+    `
   );
   return layout(html, { body, title });
 }

@@ -21,28 +21,26 @@ export const offlineBody = async html => {
   return main(
     html,
     html`
-      <div class="p-m">
-        <h1>It looks like you are offline.</h1>
-        ${news.length
-          ? html`
-              <p>
-                We don't have this item saved offline, but here's some news
-                items that we have saved.
-              </p>
-            `
-          : html`
-              <p>
-                Sorry, We don't have any news saved for you to read offline yet.
-              </p>
-            `}
-      </div>
-
-      ${!!news.length &&
-        html`
-          <ul class="news-list">
-            ${news.map(item => newsListItem(html, { item }))}
-          </ul>
-        `}
+      <h1>It looks like you are offline.</h1>
+      ${news.length
+        ? html`
+            <p>
+              We don't have this item saved offline, but here's some news items
+              that we have saved.
+            </p>
+          `
+        : html`
+            <p>
+              Sorry, We don't have any news saved for you to read offline yet.
+            </p>
+          `}
+      ${!!news.length
+        ? html`
+            <ul class="news-list">
+              ${news.map(item => newsListItem(html, { item }))}
+            </ul>
+          `
+        : ""}
     `
   );
 };
