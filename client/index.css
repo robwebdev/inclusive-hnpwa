@@ -16,6 +16,10 @@ main * + * {
   padding: 8px;
 }
 
+.p-xs {
+  padding: 4px;
+}
+
 .pb-s {
   padding-bottom: 8px;
 }
@@ -90,6 +94,8 @@ body {
   display: grid;
   grid-template-rows: auto 1fr auto;
   background-color: #fdfdfd;
+  border-top: #ff6600 3px solid;
+  border-bottom: #ff6600 3px solid;
 }
 
 h1 {
@@ -143,6 +149,10 @@ a:focus {
   color: white;
 }
 
+a:focus path {
+  fill: white;
+}
+
 .url {
   word-break: break-all;
   font-size: 1em;
@@ -165,6 +175,7 @@ a:focus {
 
 .skip-link:focus {
   transform: translateY(0%);
+  position: static;
 }
 
 .offline-message {
@@ -180,7 +191,6 @@ a:focus {
 }
 
 .main-header {
-  border-top: #ff6600 3px solid;
   background: #f8fafc;
   border-bottom: 3px solid #f1f5f8;
 }
@@ -192,6 +202,15 @@ a:focus {
 
 .main-nav__list-item {
   display: inline-block;
+}
+
+.main-nav__list-item--social {
+  margin-left: auto;
+}
+
+.main-nav__list-item--social svg {
+  width: 24px;
+  height: 24px;
 }
 
 .main-nav__link {

@@ -1,3 +1,4 @@
+import { github } from "../icons";
 import { until } from "@popeindustries/lit-html-server/directives/until.js";
 
 function isCurrentPage(title = "", current = "") {
@@ -110,7 +111,7 @@ export default (html, { title, body }) =>
               <li class="main-nav__list-item">
                 <a
                   href="/"
-                  class="pv-s ph-s block main-nav__link"
+                  class="p-s block main-nav__link"
                   aria-current=${isCurrentPage(title, "")}
                 >
                   Top
@@ -119,7 +120,7 @@ export default (html, { title, body }) =>
               <li class="main-nav__list-item">
                 <a
                   href="/new"
-                  class="pv-s ph-s block main-nav__link"
+                  class="p-s block main-nav__link"
                   aria-current=${isCurrentPage(title, "Newest")}
                 >
                   Newest
@@ -128,7 +129,7 @@ export default (html, { title, body }) =>
               <li class="main-nav__list-item">
                 <a
                   href="/show"
-                  class="pv-s ph-s block main-nav__link"
+                  class="p-s block main-nav__link"
                   aria-current=${isCurrentPage(title, "Show")}
                 >
                   Show
@@ -137,7 +138,7 @@ export default (html, { title, body }) =>
               <li class="main-nav__list-item">
                 <a
                   href="/ask"
-                  class="pv-s ph-s block main-nav__link"
+                  class="p-s block main-nav__link"
                   aria-current=${isCurrentPage(title, "Ask")}
                 >
                   Ask
@@ -146,11 +147,20 @@ export default (html, { title, body }) =>
               <li class="main-nav__list-item">
                 <a
                   href="/jobs"
-                  class="pv-s ph-s block main-nav__link"
+                  class="p-s block main-nav__link"
                   aria-current=${isCurrentPage(title, "Jobs")}
                 >
                   Jobs
                 </a>
+              </li>
+              <li class="main-nav__list-item main-nav__list-item--social">
+                <a
+                  class="p-xs block main-nav__link--social"
+                  href="https://github.com/robwebdev/inclusive-hnpwa"
+                  >${github({ html })}<span class="visually-hidden"
+                    >The GitHub repo for this application</span
+                  ></a
+                >
               </li>
             </ul>
           </nav>
@@ -158,13 +168,6 @@ export default (html, { title, body }) =>
         <main id="main" tabindex="-1" class="p-m">
           ${until(body)}
         </main>
-        <footer class="p-m main-footer">
-          Made by <a href="https://twitter.com/RobWebDev">@robwebdev</a>.
-          <a href="https://github.com/robwebdev/inclusive-hnpwa">
-            Code available on github</a
-          >
-          .
-        </footer>
       </body>
     </html>
   `;
