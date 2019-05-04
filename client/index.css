@@ -200,6 +200,14 @@ a:focus {
   margin-top: 0;
 }
 
+.offline-message svg {
+  height: 16px;
+  width: 16px;
+  margin-right: 4px;
+  margin-bottom: -3px;
+  fill: white;
+}
+
 .main-header {
   background: #f8fafc;
   border-bottom: 3px solid #f1f5f8;
