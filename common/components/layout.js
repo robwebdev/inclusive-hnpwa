@@ -105,7 +105,7 @@ export default (html, { title, body }) =>
             Skip to main content
           </a>
           <span class="block logo font-bold font-sans-serif ph-m pt-m pb-s">
-            ${book({ html })} Hacker News
+            Hacker News
           </span>
           <nav class="main-nav font-sans-serif ph-s">
             <ul class="main-nav__list horizontal">

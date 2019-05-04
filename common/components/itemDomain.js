@@ -3,7 +3,7 @@ export default function({ html }, { item }) {
     ? html`
         <p class="item-domain__site-url font-sans-serif">
           <img
-            src="${`https://api.faviconkit.com/${item.domain}/16`}"
+            src="${`https://cdn.staticaly.com/favicons/${item.domain}`}"
             alt=""
             class="item-domain__favicon"
           />
