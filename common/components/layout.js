@@ -1,4 +1,5 @@
-import { github } from "../icons";
+import { book, github, zap } from "../icons";
+
 import { until } from "@popeindustries/lit-html-server/directives/until.js";
 
 function isCurrentPage(title = "", current = "") {
@@ -103,9 +104,9 @@ export default (html, { title, body }) =>
           <a href="#main" class="skip-link">
             Skip to main content
           </a>
-          <p class="logo font-bold font-sans-serif ph-m pt-m pb-s">
-            Hacker News
-          </p>
+          <span class="block logo font-bold font-sans-serif ph-m pt-m pb-s">
+            ${book({ html })} Hacker News
+          </span>
           <nav class="main-nav font-sans-serif ph-s">
             <ul class="main-nav__list horizontal">
               <li class="main-nav__list-item">
