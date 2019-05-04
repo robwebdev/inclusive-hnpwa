@@ -190,8 +190,11 @@ a:focus path {
   background-color: #c35300;
   color: white;
   max-width: none;
-  padding: 8px 16px;
+  padding: 4px 8px;
   border-radius: 5px;
+  margin: -8px;
+  font-weight: 600;
+  font-size: 0.8rem;
 }
 
 .offline-message + .news-list__header {
