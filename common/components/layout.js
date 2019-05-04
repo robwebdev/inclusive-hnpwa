@@ -155,7 +155,9 @@ export default (html, { title, body }) =>
             </ul>
           </nav>
         </header>
-        ${until(body)}
+        <main id="main" tabindex="-1" class="p-m">
+          ${until(body)}
+        </main>
         <footer class="p-m main-footer">
           Made by <a href="https://twitter.com/RobWebDev">@robwebdev</a>.
           <a href="https://github.com/robwebdev/inclusive-hnpwa">
