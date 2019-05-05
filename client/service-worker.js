@@ -5,7 +5,7 @@ import app from "../common/app";
 import { image } from "../common/icons";
 import routeMatcher from "route-matcher";
 
-const SWVERSION = "v0.2.41";
+const SWVERSION = "v0.2.42";
 const navigationHandler = handleNavigationRequest(app, {
   serviceWorkerVersion: SWVERSION
 });

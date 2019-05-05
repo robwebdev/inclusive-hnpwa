@@ -267,9 +267,14 @@ a:focus {
 
 .item-meta,
 .text-smaller {
-  font-weight: 600;
-  font-size: 0.8rem;
+  font-weight: 400;
+  font-size: 0.9rem;
   color: #22292f;
+}
+
+.item-meta a {
+  font-weight: 700;
+  text-decoration: none;
 }
 
 .news-list {
