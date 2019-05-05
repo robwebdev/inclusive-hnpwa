@@ -20,8 +20,11 @@ export default (html, { item }) =>
       <p>${itemMeta(html, { item })}</p>
       <p class="item-meta">
         <a href="/item/${item.id}">
-          ${pluralize(item.comments_count, "comment")}
-          <span class="visually-hidden"> on ${item.title}</span></a
+          ${pluralize(item.comments_count, "comment")}<span
+            class="visually-hidden"
+          >
+            on ${item.title}</span
+          ></a
         >${item.points !== null ? " · " + pluralize(item.points, "point") : ""}
       </p>
     </li>
