@@ -1,4 +1,3 @@
-import { pluralize } from "../utils";
 import { unsafeHTML } from "@popeindustries/lit-html-server/directives/unsafe-html";
 
 const container = (html, { comments, comments_count }) =>
@@ -6,13 +5,13 @@ const container = (html, { comments, comments_count }) =>
     <section>
       ${comments_count > 0
         ? html`
-            <h2>${pluralize(comments_count, "comment")}</h2>
+            <h2>Comments</h2>
           `
         : ""}
       ${comments_count > 0 ? commentsList(html, { comments }) : ""}
       ${comments_count === 0
         ? html`
-            <p>This story has no comments</p>
+            <p class="text-smaller">This story has no comments</p>
           `
         : ""}
     </section>
@@ -29,14 +28,15 @@ function commentsList(html, { comments }) {
 function comment(html, comment) {
   return html`
     <li class="comments-list__item">
-      <p class="item-meta font-sans-serif">
-        ${comment.level === 0 ? "Comment" : "Reply"} by ${comment.user}${" "}
-        ${comment.time_ago}
-      </p>
+      <p class="item-meta"><b>${comment.user}</b> · ${comment.time_ago}</p>
       <div class="comments-list__item-content">
-        ${unsafeHTML(comment.content)}
+        ${unsafeHTML(
+          comment.content.replace(/<p>&gt;/g, '<p class="quote">&gt;')
+        )}
       </div>
-      ${commentsList(html, { comments: comment.comments })}
+      ${comment.comments.length
+        ? commentsList(html, { comments: comment.comments })
+        : ""}
     </li>
   `;
 }

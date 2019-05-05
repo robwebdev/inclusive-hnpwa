@@ -1,7 +1,7 @@
 export default function({ html }, { item }) {
   return item.domain
     ? html`
-        <p class="item-domain__site-url font-sans-serif">
+        <p class="item-domain__site-url">
           <img
             src="${`/favicon/${item.domain}`}"
             alt=""

@@ -1,4 +1,4 @@
-import { book, github, zap } from "../icons";
+import { github, zap } from "../icons";
 
 import { until } from "@popeindustries/lit-html-server/directives/until.js";
 
@@ -18,7 +18,6 @@ export default (html, { title, body }) =>
           name="Description"
           content="An inclusive Hacker News PWA implementation."
         />
-        <meta name="theme-color" content="#000000" />
         <script>
           navigator.serviceWorker.register("/service-worker.js");
         </script>
@@ -104,10 +103,10 @@ export default (html, { title, body }) =>
           <a href="#main" class="skip-link">
             Skip to main content
           </a>
-          <span class="block logo font-bold font-sans-serif ph-m pt-m pb-s">
+          <span class="block logo font-bold ph-m pt-m pb-s">
             Hacker News
           </span>
-          <nav class="main-nav font-sans-serif ph-s">
+          <nav class="main-nav ph-s">
             <ul class="main-nav__list horizontal">
               <li class="main-nav__list-item">
                 <a

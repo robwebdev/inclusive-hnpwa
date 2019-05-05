@@ -5,6 +5,7 @@ import itemMeta from "../components/itemMeta";
 import layout from "../components/layout";
 import main from "../components/main";
 import { offlineBody } from "./offline";
+import { pluralize } from "../utils";
 import { unsafeHTML } from "@popeindustries/lit-html-server/directives/unsafe-html";
 
 async function renderBody(html, id) {
@@ -22,22 +23,32 @@ async function renderBody(html, id) {
   return main(
     html,
     html`
-      ${itemDomain({ html }, { item })}
-      <h1 class="item__title">
-        ${item.type === "ask"
-          ? item.title
-          : html`
-              <a
-                href="${item.url}"
-                ?aria-describedby="${item.domain && `item-domain-${item.id}`}"
-              >
-                ${item.title}${" "}
-              </a>
-            `}
-      </h1>
-      <p>${itemMeta(html, { item })}</p>
-      <div class="item-content">
-        ${item.content && unsafeHTML(item.content)}
+      <div class="item__upper">
+        ${itemDomain({ html }, { item })}
+        <h1 class="item__title">
+          ${item.type === "ask"
+            ? item.title
+            : html`
+                <a
+                  href="${item.url}"
+                  ?aria-describedby="${item.domain && `item-domain-${item.id}`}"
+                >
+                  ${item.title}${" "}
+                </a>
+              `}
+        </h1>
+        <p>${itemMeta(html, { item })}</p>
+        <p class="item-meta">
+          <b>${pluralize(item.comments_count, "comment")}</b>${item.points !==
+          null
+            ? " · " + pluralize(item.points, "point")
+            : ""}
+        </p>
+        ${item.content
+          ? html`
+              <div class="item-content">${unsafeHTML(item.content)}</div>
+            `
+          : ""}
       </div>
       ${comments(html, item)}
     `,

@@ -2,15 +2,15 @@ import { html, renderToStream } from "@popeindustries/lit-html-server/browser";
 
 import { LONG_LIVED_OFFLINE_BACK_CACHE } from "../common/fetch";
 import app from "../common/app";
-import { image } from "../common/icons";
+import { book } from "../common/icons";
 import routeMatcher from "route-matcher";
 
-const SWVERSION = "v0.2.42";
+const SWVERSION = "v0.2.45";
 const navigationHandler = handleNavigationRequest(app, {
   serviceWorkerVersion: SWVERSION
 });
 
-const appShellURLs = ["/index.css", "/manifest.json", "/client.js"];
+const appShellURLs = ["/index.css", "/manifest.json"];
 const SHELL_CACHE = `${SWVERSION}-shell`;
 
 self.addEventListener("install", event => {
@@ -42,7 +42,7 @@ async function handleNonNavigationRequest(event) {
       return r;
     } catch (e) {
       console.log(e);
-      return new Response(renderToStream(image({ html })), {
+      return new Response(renderToStream(book({ html })), {
         headers: {
           "Content-Type": "image/svg+xml"
         }

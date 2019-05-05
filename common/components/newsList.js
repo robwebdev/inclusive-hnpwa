@@ -21,7 +21,7 @@ export default (html, { news, page = 1, heading, isOffline }) =>
             <h2 id="pagination-title" class="visually-hidden">
               Pagination
             </h2>
-            <ul class="pagination-list font-sans-serif">
+            <ul class="pagination-list">
               ${page > 1
                 ? html`
                     <li class="pagination-list__item">
