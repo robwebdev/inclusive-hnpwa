@@ -84,6 +84,7 @@ main * + * {
 
 html {
   font-size: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -407,4 +408,8 @@ a:focus {
   display: inline-block;
   margin-right: 0.3em;
   margin-top: 0;
+}
+
+.item-domain__site-url + .item__title {
+  margin-top: 1rem;
 }

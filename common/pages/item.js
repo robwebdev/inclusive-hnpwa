@@ -23,7 +23,7 @@ async function renderBody(html, id) {
     html,
     html`
       ${itemDomain({ html }, { item })}
-      <h1>
+      <h1 class="item__title">
         ${item.type === "ask"
           ? item.title
           : html`
