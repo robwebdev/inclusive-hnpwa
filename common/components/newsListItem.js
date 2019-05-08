@@ -8,7 +8,6 @@ const getItemTitleHref = item =>
 export default (html, { item }) =>
   html`
     <li class="news-list-item">
-      ${itemDomain({ html }, { item })}
       <h2 class="news-list-item__title">
         <a
           href="${getItemTitleHref(item)}"
@@ -17,6 +16,7 @@ export default (html, { item }) =>
           ${item.title}
         </a>
       </h2>
+      ${itemDomain({ html }, { item })}
       <p>${itemMeta(html, { item })}</p>
       <p class="item-meta">
         <a href="/item/${item.id}">

@@ -24,7 +24,6 @@ async function renderBody(html, id) {
     html,
     html`
       <div class="item__upper">
-        ${itemDomain({ html }, { item })}
         <h1 class="item__title">
           ${item.type === "ask"
             ? item.title
@@ -37,6 +36,7 @@ async function renderBody(html, id) {
                 </a>
               `}
         </h1>
+        ${itemDomain({ html }, { item })}
         <p>${itemMeta(html, { item })}</p>
         <p class="item-meta">
           <b>${pluralize(item.comments_count, "comment")}</b>${item.points !==
