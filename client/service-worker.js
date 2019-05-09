@@ -5,7 +5,7 @@ import app from "../common/app";
 import { book } from "../common/icons";
 import routeMatcher from "route-matcher";
 
-const SWVERSION = "v0.2.48";
+const SWVERSION = "v0.2.49";
 const navigationHandler = handleNavigationRequest(app, {
   serviceWorkerVersion: SWVERSION
 });
@@ -119,7 +119,7 @@ async function matchRouteAndRenderResponse(event, matchRoute, notFound) {
     const body = renderToStream(rendered);
     console.info("Response rendered on service worker");
     const response = new Response(body, {
-      headers: { "Content-Type": "text/html" }
+      headers: { "Content-Type": "text/html", "Transfer-Encoding": "chunked" }
     });
     return response;
   } else {
