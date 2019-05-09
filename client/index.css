@@ -175,6 +175,7 @@ a:focus {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
+  max-width: 60ch;
 }
 
 .main-nav__list-item {
