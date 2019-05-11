@@ -56,7 +56,7 @@ async function renderBody(html, id) {
   );
 }
 
-export default async function renderPage({ html }, params) {
+export default async function renderPage({ html }, params, { back }) {
   const body = renderBody(html, params.id);
-  return layout(html, { body, title: "Item" });
+  return layout(html, { body, title: "Item", back });
 }

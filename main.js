@@ -20,7 +20,9 @@ function wrapApp(app, { routes, notFound, error }) {
   routes.forEach(({ path, render }) => {
     app.get(path, async (req, res) => {
       try {
-        renderToStream(render({ html }, req.params, req.query)).pipe(res);
+        renderToStream(
+          render({ html }, req.params, { ...req.query, back: getBackUrl(req) })
+        ).pipe(res);
       } catch (e) {
         console.error(e);
         const rendered = await renderToString(error({ html }));
@@ -39,4 +41,12 @@ function wrapApp(app, { routes, notFound, error }) {
   });
 
   return app;
+}
+
+function getBackUrl(request) {
+  if (!request.headers.referrer) return;
+
+  if (req.headers.referer.indexOf(req.protocol + "://" + req.hostname) === 0) {
+    return req.headers.referer;
+  }
 }

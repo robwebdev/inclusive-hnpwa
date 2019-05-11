@@ -1,4 +1,4 @@
-import { github, zap } from "../icons";
+import { backArrow, github, zap } from "../icons";
 
 import { until } from "@popeindustries/lit-html-server/directives/until.js";
 
@@ -6,7 +6,7 @@ function isCurrentPage(title = "", current = "") {
   return title === current ? "page" : false;
 }
 
-export default (html, { title, body }) =>
+export default (html, { title, body, back }) =>
   html`
     <!DOCTYPE html>
     <html lang="en">
@@ -104,6 +104,18 @@ export default (html, { title, body }) =>
             Skip to main content
           </a>
           <span class="block font-bold ph-m pt-m pb-s">
+            ${back
+              ? html`
+                  <a
+                    href=${back}
+                    class="back-link"
+                    onclick="window.history.back('aaa'); return false;"
+                    ><span class="visually-hidden">Back</span>${backArrow({
+                      html
+                    })}</a
+                  >
+                `
+              : ""}
             Hacker News
           </span>
           <nav class="main-nav ph-s">

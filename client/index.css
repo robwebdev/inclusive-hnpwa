@@ -77,13 +77,13 @@ body {
 }
 
 h1 {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   line-height: 1.2;
   word-break: break-word;
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   line-height: 1.3;
   word-break: break-word;
 }
@@ -141,6 +141,19 @@ a:focus {
   transform: translateY(0%);
   position: static;
   outline: none;
+}
+
+.back-link {
+  text-decoration: none;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.back-link svg {
+  height: 1.5rem;
+  width: auto;
+  margin-bottom: -7px;
+  margin-top: -2px;
 }
 
 .offline-message {

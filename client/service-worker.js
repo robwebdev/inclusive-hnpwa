@@ -5,7 +5,7 @@ import app from "../common/app";
 import { book } from "../common/icons";
 import routeMatcher from "route-matcher";
 
-const SWVERSION = "v0.2.49";
+const SWVERSION = "v0.2.55";
 const navigationHandler = handleNavigationRequest(app, {
   serviceWorkerVersion: SWVERSION
 });
@@ -114,7 +114,7 @@ async function matchRouteAndRenderResponse(event, matchRoute, notFound) {
     const rendered = await match.render(
       { html },
       match.matcher.parse(url.pathname),
-      query
+      { ...query, back: getBackUrl(event.request) }
     );
     const body = renderToStream(rendered);
     console.info("Response rendered on service worker");
@@ -153,4 +153,14 @@ function respondFromCacheOrOffline(event, offline) {
     console.info("Response found in cache");
     return response;
   });
+}
+
+function getBackUrl(request) {
+  if (!request.referrer) return;
+  const referrer = new URL(request.referrer);
+  const url = new URL(request.url);
+
+  if (referrer.host === url.host) {
+    return request.referrer;
+  }
 }
