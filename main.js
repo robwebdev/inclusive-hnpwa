@@ -44,9 +44,13 @@ function wrapApp(app, { routes, notFound, error }) {
 }
 
 function getBackUrl(request) {
-  if (!request.headers.referrer) return;
+  if (!request.headers.referer) return;
 
-  if (req.headers.referer.indexOf(req.protocol + "://" + req.hostname) === 0) {
-    return req.headers.referer;
+  if (
+    request.headers.referer.indexOf(
+      request.protocol + "://" + request.hostname
+    ) === 0
+  ) {
+    return request.headers.referer;
   }
 }

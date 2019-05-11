@@ -5,7 +5,7 @@ import app from "../common/app";
 import { book } from "../common/icons";
 import routeMatcher from "route-matcher";
 
-const SWVERSION = "v0.2.55";
+const SWVERSION = "v0.2.56";
 const navigationHandler = handleNavigationRequest(app, {
   serviceWorkerVersion: SWVERSION
 });
@@ -141,7 +141,6 @@ function getQueryFromUrl(url) {
 }
 
 function respondFromCacheOrOffline(event, offline) {
-  console.log(event, offline);
   return caches.match(event.request).then(async response => {
     if (!response) {
       console.info("Not found in cache, returning offline response");

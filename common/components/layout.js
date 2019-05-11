@@ -104,22 +104,25 @@ export default (html, { title, body, back }) =>
             Skip to main content
           </a>
           <span class="block font-bold ph-m pt-m pb-s">
-            ${back
-              ? html`
-                  <a
-                    href=${back}
-                    class="back-link"
-                    onclick="window.history.back('aaa'); return false;"
-                    ><span class="visually-hidden">Back</span>${backArrow({
-                      html
-                    })}</a
-                  >
-                `
-              : ""}
             Hacker News
           </span>
-          <nav class="main-nav ph-s">
+          <nav class="main-nav">
             <ul class="main-nav__list horizontal">
+              ${back
+                ? html`
+                    <li class="main-nav__list-item">
+                      <a
+                        href=${back}
+                        class="main-nav__link--back p-xs"
+                        onclick="window.history.back(); return false;"
+                      >
+                        <span class="visually-hidden">Back</span>${backArrow({
+                          html
+                        })}
+                      </a>
+                    </li>
+                  `
+                : ""}
               <li class="main-nav__list-item">
                 <a
                   href="/"
