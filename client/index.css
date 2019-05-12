@@ -175,6 +175,7 @@ a:focus {
   position: sticky;
   position: -webkit-sticky;
   top: 0;
+  padding-top: 0.5rem;
 }
 
 .main-nav__list {
@@ -199,7 +200,7 @@ a:focus {
 
 .main-nav__list-item--social {
   margin-left: auto;
-  margin-top: 3px;
+  margin-top: 2px;
 }
 
 .main-nav__list-item--social svg {
@@ -223,8 +224,9 @@ a:focus {
 .main-nav__link--back {
   text-decoration: none;
   display: inline-block;
-  margin-right: 4px;
-  margin-top: 3px;
+  padding-right: 8px;
+  padding-left: 8px;
+  margin-top: 2px;
 }
 
 .main-nav__link--back svg {

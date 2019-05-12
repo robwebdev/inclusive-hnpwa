@@ -103,7 +103,7 @@ export default (html, { title, body, back }) =>
           <a href="#main" class="skip-link">
             Skip to main content
           </a>
-          <span class="block font-bold ph-m pt-m pb-s">
+          <span class="block font-bold ph-m pt-m">
             Hacker News
           </span>
         </header>
