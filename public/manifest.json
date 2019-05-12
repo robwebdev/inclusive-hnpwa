@@ -3,7 +3,7 @@
   "short_name": "Hacker News",
   "theme_color": "#343434",
   "background_color": "#343434",
-  "display": "browser",
+  "display": "standalone",
   "Scope": "/",
   "start_url": "/",
   "icons": [
