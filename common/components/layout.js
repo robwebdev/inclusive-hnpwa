@@ -106,80 +106,80 @@ export default (html, { title, body, back }) =>
           <span class="block font-bold ph-m pt-m pb-s">
             Hacker News
           </span>
-          <nav class="main-nav">
-            <ul class="main-nav__list horizontal">
-              ${back
-                ? html`
-                    <li class="main-nav__list-item">
-                      <a
-                        href=${back}
-                        class="main-nav__link--back p-xs"
-                        onclick="window.history.back(); return false;"
-                      >
-                        <span class="visually-hidden">Back</span>${backArrow({
-                          html
-                        })}
-                      </a>
-                    </li>
-                  `
-                : ""}
-              <li class="main-nav__list-item">
-                <a
-                  href="/"
-                  class="p-s block main-nav__link"
-                  aria-current=${isCurrentPage(title, "")}
-                >
-                  Top
-                </a>
-              </li>
-              <li class="main-nav__list-item">
-                <a
-                  href="/new"
-                  class="p-s block main-nav__link"
-                  aria-current=${isCurrentPage(title, "Newest")}
-                >
-                  Newest
-                </a>
-              </li>
-              <li class="main-nav__list-item">
-                <a
-                  href="/show"
-                  class="p-s block main-nav__link"
-                  aria-current=${isCurrentPage(title, "Show")}
-                >
-                  Show
-                </a>
-              </li>
-              <li class="main-nav__list-item">
-                <a
-                  href="/ask"
-                  class="p-s block main-nav__link"
-                  aria-current=${isCurrentPage(title, "Ask")}
-                >
-                  Ask
-                </a>
-              </li>
-              <li class="main-nav__list-item">
-                <a
-                  href="/jobs"
-                  class="p-s block main-nav__link"
-                  aria-current=${isCurrentPage(title, "Jobs")}
-                >
-                  Jobs
-                </a>
-              </li>
-              <li class="main-nav__list-item main-nav__list-item--social">
-                <a
-                  class="p-xs block main-nav__link--social"
-                  href="https://github.com/robwebdev/inclusive-hnpwa"
-                  >${github({ html })}<span class="visually-hidden"
-                    >The GitHub repo for this application</span
-                  ></a
-                >
-              </li>
-            </ul>
-          </nav>
         </header>
+        <nav class="main-nav">
+          <ul class="main-nav__list horizontal">
+            ${back
+              ? html`
+                  <li class="main-nav__list-item">
+                    <a
+                      href=${back}
+                      class="main-nav__link--back p-xs"
+                      onclick="window.history.back(); return false;"
+                    >
+                      <span class="visually-hidden">Back</span>${backArrow({
+                        html
+                      })}
+                    </a>
+                  </li>
+                `
+              : ""}
+            <li class="main-nav__list-item">
+              <a
+                href="/"
+                class="p-s block main-nav__link"
+                aria-current=${isCurrentPage(title, "")}
+              >
+                Top
+              </a>
+            </li>
+            <li class="main-nav__list-item">
+              <a
+                href="/new"
+                class="p-s block main-nav__link"
+                aria-current=${isCurrentPage(title, "Newest")}
+              >
+                Newest
+              </a>
+            </li>
+            <li class="main-nav__list-item">
+              <a
+                href="/show"
+                class="p-s block main-nav__link"
+                aria-current=${isCurrentPage(title, "Show")}
+              >
+                Show
+              </a>
+            </li>
+            <li class="main-nav__list-item">
+              <a
+                href="/ask"
+                class="p-s block main-nav__link"
+                aria-current=${isCurrentPage(title, "Ask")}
+              >
+                Ask
+              </a>
+            </li>
+            <li class="main-nav__list-item">
+              <a
+                href="/jobs"
+                class="p-s block main-nav__link"
+                aria-current=${isCurrentPage(title, "Jobs")}
+              >
+                Jobs
+              </a>
+            </li>
+            <li class="main-nav__list-item main-nav__list-item--social">
+              <a
+                class="p-xs block main-nav__link--social"
+                href="https://github.com/robwebdev/inclusive-hnpwa"
+                >${github({ html })}<span class="visually-hidden"
+                  >The GitHub repo for this application</span
+                ></a
+              >
+            </li>
+          </ul>
+        </nav>
         <main id="main" tabindex="-1" class="p-m">
           ${until(body)}
         </main>

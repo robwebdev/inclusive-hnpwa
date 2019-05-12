@@ -168,7 +168,13 @@ a:focus {
 
 .main-header {
   background: #f8fafc;
+}
+
+.main-nav {
+  background: #f8fafc;
   border-bottom: 3px solid #f1f5f8;
+  position: sticky;
+  top: 0;
 }
 
 .main-nav__list {
