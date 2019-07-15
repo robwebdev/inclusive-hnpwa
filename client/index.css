@@ -178,6 +178,10 @@ a:focus {
   padding-top: 0.5rem;
 }
 
+.key .main-nav {
+  position: static;
+}
+
 .main-nav__list {
   padding: 0;
   display: flex;
